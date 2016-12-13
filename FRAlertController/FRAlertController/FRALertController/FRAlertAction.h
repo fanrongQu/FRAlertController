@@ -12,16 +12,22 @@
 
 typedef NS_ENUM(NSInteger, FRAlertActionStyle) {
     FRAlertActionStyleDefault = 0,
-    FRAlertActionStyleCancel,
-    FRAlertActionStyleDestructive
+    FRAlertActionStyleBorder,
 };
+
+@class FRAlertAction;
+typedef void(^FRAlertActionBlock)(FRAlertAction *__nonnull action);
 
 @interface FRAlertAction : NSObject
 
-+ (nonnull FRAlertAction *)actionWithTitle:(nullable NSString *)title style:(FRAlertActionStyle)style handler:(void (^ __nullable)(FRAlertAction *__nonnull action))handler;
++ (nonnull FRAlertAction *)actionWithTitle:(nullable NSString *)title style:(FRAlertActionStyle)style color:(nullable UIColor *)color handler:(nullable FRAlertActionBlock)handler;
 
 @property (nullable, nonatomic, readonly) NSString *title;
-@property (nonatomic, readonly) FRAlertActionStyle style;
+@property (nullable, nonatomic, readonly) UIColor *color;
+@property (nonatomic, assign) FRAlertActionStyle style;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
+
+/**  FRAlertAction回调  */
+@property (nullable, nonatomic, copy) FRAlertActionBlock actionBlock;
 
 @end

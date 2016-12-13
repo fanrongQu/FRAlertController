@@ -29,6 +29,7 @@ typedef NS_ENUM(NSInteger, FRAlertControllerStyle) {
 @property (nonatomic, strong, nullable) FRAlertAction *preferredAction ;
 
 - (void)addTextFieldWithConfigurationHandler:(void (^ __nullable)(UITextField *__nonnull textField))configurationHandler;
+
 @property (nullable, nonatomic, readonly) NSArray<UITextField *> *textFields;
 
 @property (nullable, nonatomic, copy) NSString *message;

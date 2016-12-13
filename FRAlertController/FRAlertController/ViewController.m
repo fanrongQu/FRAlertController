@@ -57,21 +57,69 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0: {
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"标题" message:@"副标题" preferredStyle:UIAlertControllerStyleAlert];
-          
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
+            
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 1: {
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 2: {
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:nil message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 3: {
+            
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
+            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[UIColor orangeColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+            }];
+            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleDefault color:[UIColor redColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                
+            }];
+            [alertController addAction:cancleAction];
+            [alertController addAction:makesureAction];
+            [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 4: {
+            
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[UIColor orangeColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+            }];
+            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleDefault color:[UIColor redColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                
+            }];
+            [alertController addAction:cancleAction];
+            [alertController addAction:makesureAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+            break;
+        case 5: {
+            
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:nil message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
+            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[UIColor orangeColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+            }];
+            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleDefault color:[UIColor redColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                
+            }];
+            [alertController addAction:cancleAction];
+            [alertController addAction:makesureAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+            break;
+        case 6: {
         }
             break;
             
@@ -86,18 +134,10 @@
         _tableView = [[UITableView alloc]init];
         [self.view addSubview:_tableView];
         
-        //使用代码布局 需要将这个属性设置为NO
-        _tableView.translatesAutoresizingMaskIntoConstraints = NO;
-        //创建距顶部的约束
-        NSLayoutConstraint *constraintTop = [NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeTop multiplier:1 constant:20];
-        //创建距左边的约束
-        NSLayoutConstraint *constraintLeft = [NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
-        //创建距底部的约束
-        NSLayoutConstraint * constraintBottom = [NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
-        //创建距右边的约束
-        NSLayoutConstraint * constraintRight = [NSLayoutConstraint constraintWithItem:_tableView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeRight multiplier:1 constant:0];
-        //添加约束之前，必须将视图加在父视图上
-        [self.view addConstraints:@[constraintTop,constraintLeft,constraintBottom,constraintRight]];
+        [_tableView setAutoLayoutTopToViewTop:self.view constant:20];
+        [_tableView setAutoLayoutLeftToViewLeft:self.view constant:0];
+        [_tableView setAutoLayoutRightToViewRight:self.view constant:0];
+        [_tableView setAutoLayoutBottomToViewBottom:self.view constant:0];
         
         _tableView.delegate = self;
         _tableView.dataSource = self;
@@ -107,7 +147,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"提醒",@"带按钮的提醒",@"多选择的提醒"];
+        _alertArray = @[@"提醒",@"仅标题的提醒",@"仅描述的提醒",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒"];
     }
     return _alertArray;
 }
