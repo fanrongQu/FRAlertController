@@ -53,6 +53,22 @@
     
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    //布局button
+    [self layoutButtons];
+}
+
+
+- (void)viewDidAppear:(BOOL)animated {
+    if (self.buttons.count < 1) {
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            [self dismissViewControllerAnimated:YES completion:nil];
+        });
+    }
+}
 
 
 + (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle {
@@ -79,6 +95,12 @@
     UIColor *color = action.color;
     if (action.style == FRAlertActionStyleDefault) {
         if (color) {
+            [actionButton setTitleColor:color forState:UIControlStateNormal];
+            [actionButton setBackgroundColor:[UIColor whiteColor]];
+            [actionButton setLayerWithCornerRadius:5.0];
+        }
+    }else if (action.style == FRAlertActionStyleColor) {
+        if (color) {
             [actionButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
             [actionButton setBackgroundColor:color];
             [actionButton setLayerWithCornerRadius:5.0];
@@ -96,8 +118,6 @@
     
     // 添加到父视图
     [self.alertView addSubview:actionButton];
-    //布局button
-    [self layoutButtons];
 }
 
 
@@ -133,10 +153,10 @@
     UIButton *leftButton = self.buttons[0];
     UIButton *rightButton = self.buttons[1];
     if (self.message) {
-        [leftButton setAutoLayoutTopToViewBottom:self.messageLabel constant:10];
+        [leftButton setAutoLayoutTopToViewBottom:self.messageLabel constant:12];
     }else if (self.title) {
         
-        [leftButton setAutoLayoutTopToViewBottom:self.titleLabel constant:10];
+        [leftButton setAutoLayoutTopToViewBottom:self.titleLabel constant:12];
     }else {
         
         [leftButton setAutoLayoutTopToViewBottom:self.alertView constant:12];
@@ -150,7 +170,7 @@
     [rightButton setAutoLayoutLeftToViewRight:leftButton constant:10];
     [rightButton setAutoLayoutBottomToViewBottom:leftButton constant:0];
     [rightButton setAutoLayoutRightToViewRight:self.alertView constant:-15];
-    [rightButton setAutoLayoutToViewWidth:leftButton constant:0];
+    [rightButton setAutoLayoutWidthToView:leftButton constant:0];
     
     [self.alertView setNeedsLayout];
 }
@@ -158,7 +178,48 @@
 
 /** 垂直布局 */
 - (void)layoutButtonsVertical {
+    // 记录最下面的一个view
+    UIView *lastView;
     
+    // 遍历在数组中的button，添加到alert上
+    NSInteger count = self.buttons.count;
+    for (NSInteger n = 0; n < count; n++) {
+        
+        UIButton *button = self.buttons[n];
+        if(!lastView) {
+            if (self.message) {
+                lastView = self.messageLabel;
+            }else if (self.title) {
+                
+                lastView = self.titleLabel;
+            }else {
+                
+                lastView = self.alertView;
+            }
+            [button setAutoLayoutTopToViewBottom:lastView constant:12];
+            
+            //添加分割线
+            UIView *lineView = [[UIView alloc] init];
+            lineView.backgroundColor = FRUIColor_RGB(192, 190, 197, 1);
+            [self.alertView insertSubview:lineView belowSubview:button];
+            [lineView setAutoLayoutTopToViewTop:button constant:-0.5];
+            [lineView setAutoLayoutBottomToViewBottom:self.alertView constant:0];
+            [lineView setAutoLayoutWidthToView:button constant:0];
+            [lineView setAutoLayoutCenterXToViewCenterX:button constant:0];
+        }else {
+            [button setAutoLayoutTopToViewBottom:lastView constant:0.5];
+        }
+        [button setAutoLayoutLeftToViewLeft:self.alertView constant:0];
+        [button setAutoLayoutRightToViewRight:self.alertView constant:0];
+        [button setAutoLayoutHeight:40];
+        if (n == count - 1) {
+            [button setAutoLayoutBottomToViewBottom:self.alertView constant:0];
+        }
+        //修改按钮样式
+        [button setLayerWithCornerRadius:0 borderWidth:0 borderColor:nil];
+        
+        lastView = button;
+    }
 }
 
 
@@ -190,13 +251,13 @@
         //创建距中的约束
         [_alertView setAutoLayoutCenterToViewCenter:self.view];
         //创建距左边的约束
-        [_alertView setAutoLayoutLeftToViewLeft:self.view constant:30];
+        [_alertView setAutoLayoutLeftToViewLeft:self.view constant:25];
         //创建距右边的约束
-        [_alertView setAutoLayoutRightToViewRight:self.view constant:-30];
+        [_alertView setAutoLayoutRightToViewRight:self.view constant:-25];
         
         _alertView.backgroundColor = [UIColor whiteColor];
         [_alertView setLayerWithCornerRadius:5.0];
-        _alertView.alpha = 0.9;
+//        _alertView.alpha = 0.9;
     }
     return _alertView;
 }

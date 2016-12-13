@@ -214,7 +214,7 @@
  @param view 依赖的视图
  @param constant 宽度
  */
-- (void)setAutoLayoutToViewWidth:(UIView *)view constant:(CGFloat)constant {
+- (void)setAutoLayoutWidthToView:(UIView *)view constant:(CGFloat)constant {
     
     //使用代码布局 需要将这个属性设置为NO
     self.translatesAutoresizingMaskIntoConstraints = NO;
@@ -245,7 +245,7 @@
  @param view 依赖的视图
  @param constant 高度
  */
-- (void)setAutoLayoutToViewHeight:(UIView *)view constant:(CGFloat)constant {
+- (void)setAutoLayoutHeightToView:(UIView *)view constant:(CGFloat)constant {
     
     //使用代码布局 需要将这个属性设置为NO
     self.translatesAutoresizingMaskIntoConstraints = NO;

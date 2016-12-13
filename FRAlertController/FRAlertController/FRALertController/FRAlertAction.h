@@ -12,6 +12,7 @@
 
 typedef NS_ENUM(NSInteger, FRAlertActionStyle) {
     FRAlertActionStyleDefault = 0,
+    FRAlertActionStyleColor,
     FRAlertActionStyleBorder,
 };
 

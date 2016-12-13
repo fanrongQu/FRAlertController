@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */; };
+		3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */; };
 		3BF5F2021DFBD1B1005BCAEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2011DFBD1B1005BCAEC /* main.m */; };
 		3BF5F2051DFBD1B1005BCAEC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2041DFBD1B1005BCAEC /* AppDelegate.m */; };
 		3BF5F2081DFBD1B1005BCAEC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2071DFBD1B1005BCAEC /* ViewController.m */; };
@@ -20,6 +22,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3BDF9F9C1DFFD6A400C20263 /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
+		3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
+		3BDF9F9F1DFFD75800C20263 /* ActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetViewController.h; sourceTree = "<group>"; };
+		3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetViewController.m; sourceTree = "<group>"; };
 		3BF5F1FD1DFBD1B1005BCAEC /* FRAlertController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FRAlertController.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF5F2011DFBD1B1005BCAEC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BF5F2031DFBD1B1005BCAEC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -74,6 +80,10 @@
 				3BF5F2041DFBD1B1005BCAEC /* AppDelegate.m */,
 				3BF5F2061DFBD1B1005BCAEC /* ViewController.h */,
 				3BF5F2071DFBD1B1005BCAEC /* ViewController.m */,
+				3BDF9F9C1DFFD6A400C20263 /* AlertViewController.h */,
+				3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */,
+				3BDF9F9F1DFFD75800C20263 /* ActionSheetViewController.h */,
+				3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */,
 				3BF5F2171DFBD3A8005BCAEC /* FRALertController */,
 				3BF5F2091DFBD1B1005BCAEC /* Main.storyboard */,
 				3BF5F20C1DFBD1B1005BCAEC /* Assets.xcassets */,
@@ -185,6 +195,8 @@
 				3BF5F21A1DFBD3C5005BCAEC /* FRAlertController.m in Sources */,
 				3BF5F2021DFBD1B1005BCAEC /* main.m in Sources */,
 				3BF5F2261DFC0451005BCAEC /* UIView+Layer.m in Sources */,
+				3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */,
+				3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -121,7 +121,7 @@
  @param view 依赖的视图
  @param constant 宽度
  */
-- (void)setAutoLayoutToViewWidth:(UIView *)view constant:(CGFloat)constant;
+- (void)setAutoLayoutWidthToView:(UIView *)view constant:(CGFloat)constant;
 
 
 /**
@@ -137,7 +137,7 @@
  @param view 依赖的视图
  @param constant 高度
  */
-- (void)setAutoLayoutToViewHeight:(UIView *)view constant:(CGFloat)constant;
+- (void)setAutoLayoutHeightToView:(UIView *)view constant:(CGFloat)constant;
 
 /**
  视图的大小约束

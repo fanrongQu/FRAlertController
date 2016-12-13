@@ -7,7 +7,9 @@
 //
 
 #import "ViewController.h"
-#import "FRAlertController.h"
+#import "UIView+AutoLayout.h"
+#import "AlertViewController.h"
+#import "ActionSheetViewController.h"
 
 @interface ViewController ()<UITableViewDataSource,UITableViewDelegate>
 
@@ -24,7 +26,7 @@
     [super viewDidLoad];
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
+    self.title = @"FRAlertController   DEMO";
     [self tableView];
 }
 
@@ -57,72 +59,16 @@
     NSInteger row = indexPath.row;
     switch (row) {
         case 0: {
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
-            
-            [self presentViewController:alertController animated:YES completion:nil];
+            AlertViewController *alertVC = [[AlertViewController alloc] init];
+            [self.navigationController pushViewController:alertVC animated:YES];
         }
             break;
         case 1: {
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:nil preferredStyle:UIAlertControllerStyleAlert];
             
-            [self presentViewController:alertController animated:YES completion:nil];
+            ActionSheetViewController *actionSheetVC = [[ActionSheetViewController alloc] init];
+            [self.navigationController pushViewController:actionSheetVC animated:YES];
         }
             break;
-        case 2: {
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:nil message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
-            
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-            break;
-        case 3: {
-            
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
-            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[UIColor orangeColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-            }];
-            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleDefault color:[UIColor redColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-                
-            }];
-            [alertController addAction:cancleAction];
-            [alertController addAction:makesureAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-            break;
-        case 4: {
-            
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[UIColor orangeColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-            }];
-            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleDefault color:[UIColor redColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-                
-            }];
-            [alertController addAction:cancleAction];
-            [alertController addAction:makesureAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-            break;
-        case 5: {
-            
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:nil message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
-            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[UIColor orangeColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-            }];
-            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleDefault color:[UIColor redColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-                
-            }];
-            [alertController addAction:cancleAction];
-            [alertController addAction:makesureAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-            break;
-        case 6: {
-        }
-            break;
-            
         default:
             break;
     }
@@ -134,7 +80,7 @@
         _tableView = [[UITableView alloc]init];
         [self.view addSubview:_tableView];
         
-        [_tableView setAutoLayoutTopToViewTop:self.view constant:20];
+        [_tableView setAutoLayoutTopToViewTop:self.view constant:0];
         [_tableView setAutoLayoutLeftToViewLeft:self.view constant:0];
         [_tableView setAutoLayoutRightToViewRight:self.view constant:0];
         [_tableView setAutoLayoutBottomToViewBottom:self.view constant:0];
@@ -147,7 +93,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"提醒",@"仅标题的提醒",@"仅描述的提醒",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒"];
+        _alertArray = @[@"Alert样式",@"ActionSheet样式"];
     }
     return _alertArray;
 }
