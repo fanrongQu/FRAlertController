@@ -8,10 +8,10 @@
 
 #import "FRAlertController.h"
 
-@interface FRAlertController ()
+@interface FRAlertController ()<UITableViewDataSource,UITableViewDelegate>
 
 /**  alert类型  */
-@property (nonatomic, assign) UIAlertControllerStyle preferredStyle;
+@property (nonatomic, assign) UIAlertControllerStyle alertPreferredStyle;
 
 /**  背景  */
 @property (nonatomic, strong) UIView *alertView;
@@ -23,6 +23,17 @@
 @property (nonatomic, strong) NSMutableArray *mutableActions;
 /**  按钮数组  */
 @property (nonatomic, strong) NSMutableArray *buttons;
+
+/**  alertArray  */
+@property (nonatomic, strong) NSArray *alertArray;
+/**  关闭按钮  */
+@property (nonatomic, strong) UIButton *closeBtn;
+/**  滚动选项视图  */
+@property (nonatomic, strong) UITableView *tableView;
+
+@property (nonatomic, copy) FRAlertDatePickerBlock alertDatePickerBlock;
+
+@property (nonatomic, copy) FRAlertArrayBlock alertArrayBlock;
 
 @end
 
@@ -43,13 +54,37 @@
     return self;
 }
 
+- (void)dealloc {
+    if (_alertView != nil) _alertView = nil;
+    if (_titleLabel != nil) _titleLabel = nil;
+    if (_messageLabel != nil) _messageLabel = nil;
+    if (_mutableActions != nil) _mutableActions = nil;
+    if (_buttons != nil) _buttons = nil;
+    if (_datePicker != nil) _datePicker = nil;
+    if (_textFields != nil) _textFields = nil;
+    if (_alertArray != nil) _alertArray = nil;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0.35);
     [self alertView];
     if (self.title.length > 0) self.titleLabel.text = self.title;
-    if (self.message.length > 0) self.messageLabel.text = self.message;
+    
+    if (self.alertArray.count > 0) {
+        
+        CGFloat height = self.view.frame.size.height - 160;
+        CGFloat tableViewH = self.alertArray.count * 44 + 60;
+        
+        height = height > tableViewH ? tableViewH : height;
+        //根据数组的长度设置alertView的高度
+        [self.alertView setAutoLayoutHeight:height];
+        
+        [self.tableView reloadData];
+        
+        [self.closeBtn addTarget:self action:@selector(closeDataPicker) forControlEvents:UIControlEventTouchUpInside];
+    }else if (self.message.length > 0) self.messageLabel.text = self.message;
     
 }
 
@@ -62,7 +97,7 @@
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    if (self.buttons.count < 1) {
+    if (!(self.buttons.count > 1 || self.alertArray.count > 0)) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -75,7 +110,7 @@
     FRAlertController *alertController = [[FRAlertController alloc] init];
     alertController.title = title;
     alertController.message = message;
-    alertController.preferredStyle = preferredStyle;
+    alertController.alertPreferredStyle = preferredStyle;
     
     return alertController;
 }
@@ -121,6 +156,49 @@
 }
 
 
+
+/**
+ 添加日期选择器
+ 
+ @param color 确定按钮颜色
+ @param style 确定按钮样式
+ @param configurationHandler 日期选择器回调
+ */
+- (void)addDatePickerWithColor:(nullable UIColor *)color style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler {
+    
+    __weak typeof(self) weakSelf = self;
+    FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[UIColor redColor] handler:nil];
+    
+    FRAlertAction *makeSureAction = [FRAlertAction actionWithTitle:@"确定" style:style color:color handler:^(FRAlertAction * _Nonnull action) {
+        NSLog(@"%s",__func__);
+        if(weakSelf.alertDatePickerBlock) weakSelf.alertDatePickerBlock(self.datePicker);
+    }];
+    [self addAction:cancleAction];
+    [self addAction:makeSureAction];
+
+//    /** 日期选择 -2209017600 = 1900/01/01 */
+//    if(!minimumDate) minimumDate = [NSDate dateWithTimeIntervalSince1970:-2209017600];
+//    if(!maximumDate) maximumDate = [NSDate date];
+//    [self.datePicker setMinimumDate:minimumDate];
+//    [self.datePicker setMaximumDate:maximumDate];
+//    if (defaultDate) [self.datePicker setDate:defaultDate animated:NO];
+    [self datePicker];
+    self.alertDatePickerBlock = configurationHandler;
+}
+
+
+/**
+ 数组选择
+
+ @param array 待选数组
+ @param configurationHandler 选中数组的序号
+ */
+- (void)addSelectArray:(nonnull NSArray *)array configurationHandler:(nonnull FRAlertArrayBlock)configurationHandler {
+    
+    self.alertArray = array;
+    self.alertArrayBlock = configurationHandler;
+}
+
 /** 点击按钮事件 */
 - (void)actionButtonDidClicked:(UIButton *)sender {
     
@@ -152,7 +230,10 @@
     
     UIButton *leftButton = self.buttons[0];
     UIButton *rightButton = self.buttons[1];
-    if (self.message) {
+    if (_datePicker) {
+        
+        [leftButton setAutoLayoutTopToViewBottom:self.datePicker constant:12];
+    }else if (self.message) {
         [leftButton setAutoLayoutTopToViewBottom:self.messageLabel constant:12];
     }else if (self.title) {
         
@@ -187,7 +268,9 @@
         
         UIButton *button = self.buttons[n];
         if(!lastView) {
-            if (self.message) {
+            if (_datePicker) {
+                lastView = self.datePicker;
+            }else if (self.message) {
                 lastView = self.messageLabel;
             }else if (self.title) {
                 
@@ -223,6 +306,42 @@
 }
 
 
+
+#pragma mark - tableView dataSource
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.alertArray.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *ID = @"FRAlertControllerCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }
+    cell.textLabel.text = self.alertArray[indexPath.row];
+    cell.textLabel.font = [UIFont systemFontOfSize:14];
+    return cell;
+}
+
+
+#pragma mark - tableView delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
+    if (self.alertArrayBlock) {
+        self.alertArrayBlock(indexPath.row);
+    }
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)closeDataPicker {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 #pragma mark - 数据处理
 - (NSMutableArray *)mutableActions {
     if (!_mutableActions) {
@@ -241,6 +360,10 @@
 - (NSArray<FRAlertAction *> *)actions {
     
     return _mutableActions;
+}
+
+- (UIAlertControllerStyle)preferredStyle {
+    return _alertPreferredStyle;
 }
 
 #pragma mark - 视图懒加载
@@ -269,7 +392,7 @@
         [_titleLabel setAutoLayoutTopToViewTop:self.alertView constant:12];
         [_titleLabel setAutoLayoutLeftToViewLeft:self.alertView constant:15];
         [_titleLabel setAutoLayoutRightToViewRight:self.alertView constant:-15];
-        if (self.buttons.count < 1 && !self.message) {
+        if (self.buttons.count < 1 && !self.message && self.alertArray.count < 1) {
             [_titleLabel setAutoLayoutBottomToViewBottom:self.alertView constant:-12];
         }
         
@@ -305,9 +428,66 @@
     return _messageLabel;
 }
 
-//#pragma mark - 测试
-//- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
-//    [self dismissViewControllerAnimated:YES completion:nil];
-//}
+
+- (UIDatePicker *)datePicker {
+    if (!_datePicker) {
+        _datePicker = [[UIDatePicker alloc] init];
+        [self.alertView addSubview:_datePicker];
+        if (self.message) {
+            [_datePicker setAutoLayoutTopToViewBottom:self.messageLabel constant:0];
+        }else if (self.title) {
+            [_datePicker setAutoLayoutTopToViewBottom:self.titleLabel constant:0];
+        }else {
+            [_datePicker setAutoLayoutTopToViewBottom:self.alertView constant:0];
+        }
+        [_datePicker setAutoLayoutLeftToViewLeft:self.alertView constant:0];
+        [_datePicker setAutoLayoutRightToViewRight:self.alertView constant:0];
+        [_datePicker setAutoLayoutHeight:180];
+        
+        [_datePicker setDatePickerMode:UIDatePickerModeDate];
+        [_datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
+        _datePicker.timeZone = [NSTimeZone timeZoneWithName:@"Asia/beijing"];
+
+    }
+    return _datePicker;
+}
+
+
+- (UIButton *)closeBtn {
+    if (!_closeBtn) {
+        _closeBtn = [[UIButton alloc]init];
+        
+        [self.alertView addSubview:_closeBtn];
+        [_closeBtn setAutoLayoutTopToViewTop:self.alertView constant:10];
+        [_closeBtn setAutoLayoutRightToViewRight:self.alertView constant:-10];
+        [_closeBtn setAutoLayoutSize:CGSizeMake(25, 25)];
+        
+        [_closeBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
+        _closeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
+    }
+    return _closeBtn;
+}
+
+
+- (UITableView *)tableView {
+    if (!_tableView) {
+        _tableView = [[UITableView alloc]init];
+        
+        [self.alertView addSubview:_tableView];
+        if (self.title) {
+            [_tableView setAutoLayoutTopToViewBottom:self.titleLabel constant:12];
+        }else {
+            [_tableView setAutoLayoutTopToViewTop:self.alertView constant:30];
+        }
+        [_tableView setAutoLayoutLeftToViewLeft:self.alertView constant:0];
+        [_tableView setAutoLayoutBottomToViewBottom:self.alertView constant:-12];
+        [_tableView setAutoLayoutRightToViewRight:self.alertView constant:-15];
+        _tableView.delegate = self;
+        _tableView.dataSource = self;
+        _tableView.bounces = NO;
+    }
+    return _tableView;
+}
+
 
 @end

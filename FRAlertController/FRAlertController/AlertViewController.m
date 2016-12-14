@@ -156,9 +156,33 @@
         }
             break;
         case 8: {
+            
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"选择日期" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            
+            [alertController addDatePickerWithColor:[self randomColor] style:FRAlertActionStyleBorder configurationHandler:^(UIDatePicker * _Nonnull datePicker) {
+                
+                NSDate *selected = [datePicker date];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                NSString *resultString = [dateFormatter stringFromDate:selected];
+
+                NSLog(@"%@",resultString);
+            }];
+            //如需设置datePicker属性请调用alertController.datePicker进行设置
+            
+            [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 9: {
+            
+            
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"选择地区" message:nil preferredStyle:UIAlertControllerStyleAlert];
+            NSArray *array = @[@"北京",@"上海",@"天津",@"广州",@"重庆",@"杭州",@"深圳",@"南京",@"郑州",@"武汉",@"长沙"];
+            [alertController addSelectArray:array configurationHandler:^(NSInteger row) {
+                NSLog(@"%@",array[row]);
+            }];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
             
@@ -186,7 +210,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"系统样式",@"提醒",@"仅标题的提醒",@"仅描述的提醒",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒"];
+        _alertArray = @[@"系统样式",@"提醒",@"仅标题的提醒",@"仅描述的提醒",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒",@"日期选择器",@"数组选取"];
     }
     return _alertArray;
 }
