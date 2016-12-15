@@ -1,8 +1,7 @@
 # FRAlertController-master
 模仿系统UIAlertController实现的一个FRAlertController
 
-![](https://github.com/fanrongQu/FRAlertController-master/blob/master/alert.gif)      
-![](https://github.com/fanrongQu/FRAlertController-master/blob/master/ActionSheet.gif)  
+![](https://github.com/fanrongQu/FRAlertController-master/blob/master/alert.gif)![](https://github.com/fanrongQu/FRAlertController-master/blob/master/ActionSheet.gif)  
 
 
 ## FRAlertController
