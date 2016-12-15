@@ -1,18 +1,18 @@
 # FRAlertController-master
 模仿系统UIAlertController实现的一个FRAlertController
 
-![](https://github.com/fanrongQu/FRAlertController-master/blob/master/alert.gif)  
+![](https://github.com/fanrongQu/FRAlertController-master/blob/master/alert.gif)      
+![](https://github.com/fanrongQu/FRAlertController-master/blob/master/ActionSheet.gif)  
 
 
 ## FRAlertController
 
 ```Objective-C
-
-+ (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle;
++ (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle;
 
 @property (nullable, nonatomic, copy) NSString *message;
 
-@property (nonatomic, readonly) UIAlertControllerStyle preferredStyle;
+@property (nonatomic, readonly) FRAlertControllerStyle preferredStyle;
 
 - (void)addAction:(nonnull FRAlertAction *)action;
 
@@ -28,7 +28,6 @@
  添加日期选择器(默认选中日期为今天  最小日期默认为1900/01/01  最大日期默认为当前日期)
  
  @param color 确定按钮颜色
- @param style 确定按钮样式
  @param configurationHandler 日期选择器回调
  */
 - (void)addDatePickerWithColor:(nullable UIColor *)color style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler;
@@ -49,6 +48,12 @@
 ## FRAlertAction
 
 ```Objective-C
+typedef NS_ENUM(NSInteger, FRAlertActionStyle) {
+    FRAlertActionStyleDefault = 0,//普通按钮
+    FRAlertActionStyleColor,//背景色
+    FRAlertActionStyleBorder//边框
+};
+
 + (nonnull FRAlertAction *)actionWithTitle:(nullable NSString *)title style:(FRAlertActionStyle)style color:(nullable UIColor *)color handler:(nullable FRAlertActionBlock)handler;
 
 @property (nullable, nonatomic, readonly) NSString *title;
