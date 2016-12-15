@@ -5,7 +5,8 @@
 
 
 ## FRAlertController
-```
+
+```Objective-C
 
 + (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle;
 
@@ -43,10 +44,11 @@
  @param configurationHandler 选中数组的序号
  */
 - (void)addSelectArray:(nonnull NSArray *)array configurationHandler:(nonnull FRAlertArrayBlock)configurationHandler;
-```Objective-C
-## FRAlertAction
 ```
 
+## FRAlertAction
+
+```Objective-C
 + (nonnull FRAlertAction *)actionWithTitle:(nullable NSString *)title style:(FRAlertActionStyle)style color:(nullable UIColor *)color handler:(nullable FRAlertActionBlock)handler;
 
 @property (nullable, nonatomic, readonly) NSString *title;
@@ -54,4 +56,4 @@
 @property (nonatomic, assign) FRAlertActionStyle style;
 @property (nonatomic, getter=isEnabled) BOOL enabled;
 
-```Objective-C
+```
