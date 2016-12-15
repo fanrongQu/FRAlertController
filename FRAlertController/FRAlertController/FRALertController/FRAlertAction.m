@@ -27,6 +27,7 @@
     
     alertAction.style = style;
     alertAction.actionBlock = handler;
+    alertAction.enabled = YES;
     return alertAction;
 }
 

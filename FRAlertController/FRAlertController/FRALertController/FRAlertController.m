@@ -128,6 +128,7 @@
     [actionButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
     [actionButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
     [actionButton setBackgroundColor:[UIColor whiteColor]];
+    actionButton.enabled = action.isEnabled;
     
     UIColor *color = action.color;
     if (action.style == FRAlertActionStyleDefault) {

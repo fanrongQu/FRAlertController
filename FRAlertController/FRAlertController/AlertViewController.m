@@ -144,10 +144,11 @@
                 NSLog(@"%s",__func__);
                 
             }];
-            FRAlertAction *seeAction = [FRAlertAction actionWithTitle:@"查看" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+            FRAlertAction *seeAction = [FRAlertAction actionWithTitle:@"不可点击" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
                 NSLog(@"%s",__func__);
                 
             }];
+            seeAction.enabled = NO;
             [alertController addAction:cancleAction];
             [alertController addAction:makesureAction];
             [alertController addAction:seeAction];
