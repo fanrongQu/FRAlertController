@@ -11,7 +11,7 @@
 @interface FRAlertController ()<UITableViewDataSource,UITableViewDelegate>
 
 /**  alert类型  */
-@property (nonatomic, assign) UIAlertControllerStyle alertPreferredStyle;
+@property (nonatomic, assign) FRAlertControllerStyle alertPreferredStyle;
 
 /**  背景  */
 @property (nonatomic, strong) UIView *alertView;
@@ -50,8 +50,6 @@
         }else{
             self.modalPresentationStyle = UIModalPresentationCurrentContext;
         }
-        //弹出动画
-        [self setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     }
     return self;
 }
@@ -70,7 +68,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0.35);
     [self alertView];
     if (self.title.length > 0) self.titleLabel.text = self.title;
     
@@ -88,6 +85,18 @@
         [self.closeBtn addTarget:self action:@selector(closeDataPicker) forControlEvents:UIControlEventTouchUpInside];
     }else if (self.message.length > 0) self.messageLabel.text = self.message;
     
+    if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+       
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+            
+            __weak typeof(self) weakSelf = self;
+            [UIView animateWithDuration:0.1 animations:^{
+                weakSelf.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0.3);
+            }];
+        });
+    }else {
+        self.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0.35);
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -95,25 +104,45 @@
     
     //布局button
     [self layoutButtons];
+    
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     if (!(self.buttons.count > 1 || self.alertArray.count > 0)) {
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
             [self dismissViewControllerAnimated:YES completion:nil];
         });
     }
+    
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    __weak typeof(self) weakSelf = self;
+//    [UIView animateWithDuration:0.1 animations:^{
+        weakSelf.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0);
+//    }];
 }
 
 
-+ (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle {
++ (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle {
     FRAlertController *alertController = [[FRAlertController alloc] init];
     alertController.title = title;
     alertController.message = message;
     alertController.alertPreferredStyle = preferredStyle;
     
+    if (preferredStyle == FRAlertControllerStyleActionSheet) {
+        //弹出动画
+        [alertController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    }else {
+        //弹出动画
+        [alertController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    }
     return alertController;
 }
 
@@ -224,11 +253,20 @@
 - (void)layoutButtons {
     // 根据当前button的数量来布局
     switch (self.buttons.count) {
-        case 2:
-            [self layoutButtonsHorizontal];
+        case 2:{
+            if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+                //垂直布局
+                [self layoutButtonsVertical];
+            }else {
+                //水平布局
+                [self layoutButtonsHorizontal];
+            }
+        }
             break;
-        default:
+        default:{
+            //垂直布局
             [self layoutButtonsVertical];
+        }
             break;
     }
 }
@@ -371,7 +409,7 @@
     return _mutableActions;
 }
 
-- (UIAlertControllerStyle)preferredStyle {
+- (FRAlertControllerStyle)preferredStyle {
     return _alertPreferredStyle;
 }
 
@@ -380,12 +418,17 @@
     if (!_alertView) {
         _alertView = [[UIView alloc]init];
         [self.view addSubview:_alertView];
-        //创建距中的约束
-        [_alertView setAutoLayoutCenterToViewCenter:self.view];
+        if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+            //创建距底部的约束
+            [_alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
+        }else {
+            //创建距中的约束
+            [_alertView setAutoLayoutCenterToViewCenter:self.view];
+        }
         //创建距左边的约束
-        [_alertView setAutoLayoutLeftToViewLeft:self.view constant:25];
+        [_alertView setAutoLayoutLeftToViewLeft:self.view constant:20];
         //创建距右边的约束
-        [_alertView setAutoLayoutRightToViewRight:self.view constant:-25];
+        [_alertView setAutoLayoutRightToViewRight:self.view constant:-20];
         
         _alertView.backgroundColor = [UIColor whiteColor];
         [_alertView setLayerWithCornerRadius:5.0];

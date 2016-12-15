@@ -73,71 +73,53 @@
         }
             break;
         case 1: {
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
             
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:FRAlertControllerStyleActionSheet];
+            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+            }];
+            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                
+            }];
+            [alertController addAction:cancleAction];
+            [alertController addAction:makesureAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 2: {
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:nil preferredStyle:UIAlertControllerStyleAlert];
             
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:nil preferredStyle:FRAlertControllerStyleActionSheet];
+            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+            }];
+            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                
+            }];
+            [alertController addAction:cancleAction];
+            [alertController addAction:makesureAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 3: {
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:nil message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
             
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:nil message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:FRAlertControllerStyleActionSheet];
+            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+            }];
+            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                
+            }];
+            [alertController addAction:cancleAction];
+            [alertController addAction:makesureAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
         case 4: {
             
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
-            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-            }];
-            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-                
-            }];
-            [alertController addAction:cancleAction];
-            [alertController addAction:makesureAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-            break;
-        case 5: {
-            
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:nil preferredStyle:UIAlertControllerStyleAlert];
-            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-            }];
-            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-                
-            }];
-            [alertController addAction:cancleAction];
-            [alertController addAction:makesureAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-            break;
-        case 6: {
-            
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:nil message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
-            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-            }];
-            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
-                NSLog(@"%s",__func__);
-                
-            }];
-            [alertController addAction:cancleAction];
-            [alertController addAction:makesureAction];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-            break;
-        case 7: {
-            
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:UIAlertControllerStyleAlert];
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:FRAlertControllerStyleActionSheet];
             FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
                 NSLog(@"%s",__func__);
             }];
@@ -156,11 +138,11 @@
             
         }
             break;
-        case 8: {
+        case 5: {
             
         }
             break;
-        case 9: {
+        case 6: {
         }
             break;
             
@@ -188,7 +170,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"系统样式",@"提醒",@"仅标题的提醒",@"仅描述的提醒",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒"];
+        _alertArray = @[@"系统样式",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒"];
     }
     return _alertArray;
 }

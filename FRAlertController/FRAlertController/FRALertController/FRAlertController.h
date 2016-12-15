@@ -24,11 +24,11 @@ typedef void (^ FRAlertArrayBlock)(NSInteger row);
 
 @interface FRAlertController : UIViewController
 
-+ (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(UIAlertControllerStyle)preferredStyle;
++ (nonnull FRAlertController *)alertControllerWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle;
 
 @property (nullable, nonatomic, copy) NSString *message;
 
-@property (nonatomic, readonly) UIAlertControllerStyle preferredStyle;
+@property (nonatomic, readonly) FRAlertControllerStyle preferredStyle;
 
 - (void)addAction:(nonnull FRAlertAction *)action;
 
@@ -44,7 +44,6 @@ typedef void (^ FRAlertArrayBlock)(NSInteger row);
  添加日期选择器(默认选中日期为今天  最小日期默认为1900/01/01  最大日期默认为当前日期)
  
  @param color 确定按钮颜色
- @param style 确定按钮样式
  @param configurationHandler 日期选择器回调
  */
 - (void)addDatePickerWithColor:(nullable UIColor *)color style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler;
