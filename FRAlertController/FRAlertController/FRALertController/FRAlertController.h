@@ -18,9 +18,9 @@ typedef NS_ENUM(NSInteger, FRAlertControllerStyle) {
     FRAlertControllerStyleAlert
 };
 
-typedef void (^FRAlertDatePickerBlock)(UIDatePicker *__nonnull datePicker);
-
-typedef void (^FRAlertArrayBlock)(NSInteger row);
+typedef void (^ FRAlertDatePickerBlock)(UIDatePicker *__nonnull datePicker);
+typedef void(^ FRAlertTextFieldBlock)(UITextField *__nonnull textField);
+typedef void (^ FRAlertArrayBlock)(NSInteger row);
 
 @interface FRAlertController : UIViewController
 
@@ -33,11 +33,9 @@ typedef void (^FRAlertArrayBlock)(NSInteger row);
 - (void)addAction:(nonnull FRAlertAction *)action;
 
 @property (nonatomic, readonly, nullable) NSArray<FRAlertAction *> *actions;
-//
-//@property (nonatomic, strong, nullable) FRAlertAction *preferredAction ;
 
 
-- (void)addTextFieldWithConfigurationHandler:(void (^ __nullable)(UITextField *__nonnull textField))configurationHandler;
+- (void)addTextFieldWithPlaceholder:(nonnull NSString *)placeholder configurationHandler:(nonnull FRAlertTextFieldBlock)configurationHandler;
 
 @property (nullable, nonatomic, readonly) NSArray<UITextField *> *textFields;
 

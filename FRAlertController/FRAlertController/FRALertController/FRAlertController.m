@@ -33,6 +33,8 @@
 
 @property (nonatomic, copy) FRAlertDatePickerBlock alertDatePickerBlock;
 
+@property (nonatomic, copy) FRAlertTextFieldBlock alertTextFieldBlock;
+
 @property (nonatomic, copy) FRAlertArrayBlock alertArrayBlock;
 
 @end
@@ -155,7 +157,13 @@
     [self.alertView addSubview:actionButton];
 }
 
-
+- (void)addTextFieldWithPlaceholder:(nonnull NSString *)placeholder configurationHandler:(nonnull FRAlertTextFieldBlock)configurationHandler {
+    
+    UITextField *textField = [[UITextField alloc] init];
+    textField.placeholder = placeholder;
+    
+    self.alertTextFieldBlock = configurationHandler;
+}
 
 /**
  添加日期选择器
