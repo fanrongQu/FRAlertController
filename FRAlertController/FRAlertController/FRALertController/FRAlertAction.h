@@ -11,9 +11,9 @@
 #import "UIView+Layer.h"
 
 typedef NS_ENUM(NSInteger, FRAlertActionStyle) {
-    FRAlertActionStyleDefault = 0,
-    FRAlertActionStyleColor,
-    FRAlertActionStyleBorder,
+    FRAlertActionStyleDefault = 0,//普通按钮
+    FRAlertActionStyleColor,//背景色
+    FRAlertActionStyleBorder//边框
 };
 
 @class FRAlertAction;

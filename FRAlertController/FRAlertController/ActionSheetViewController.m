@@ -82,8 +82,8 @@
                 NSLog(@"%s",__func__);
                 
             }];
-            [alertController addAction:cancleAction];
             [alertController addAction:makesureAction];
+            [alertController addAction:cancleAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
@@ -97,8 +97,8 @@
                 NSLog(@"%s",__func__);
                 
             }];
-            [alertController addAction:cancleAction];
             [alertController addAction:makesureAction];
+            [alertController addAction:cancleAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
@@ -112,8 +112,8 @@
                 NSLog(@"%s",__func__);
                 
             }];
-            [alertController addAction:cancleAction];
             [alertController addAction:makesureAction];
+            [alertController addAction:cancleAction];
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
@@ -131,9 +131,9 @@
                 NSLog(@"%s",__func__);
                 
             }];
-            [alertController addAction:cancleAction];
             [alertController addAction:makesureAction];
             [alertController addAction:seeAction];
+            [alertController addAction:cancleAction];
             [self presentViewController:alertController animated:YES completion:nil];
             
         }

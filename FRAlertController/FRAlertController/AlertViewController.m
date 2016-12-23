@@ -186,7 +186,35 @@
             [self presentViewController:alertController animated:YES completion:nil];
         }
             break;
+        case 10: {
             
+            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:FRAlertControllerStyleAlert];
+            [alertController addTextFieldWithPlaceholder:@"用户名" configurationHandler:^(UITextField * _Nonnull textField) {
+                textField.placeholder = @"修改了的用户名";
+            }];
+            [alertController addTextFieldWithPlaceholder:@"密码" configurationHandler:^(UITextField * _Nonnull textField) {
+                
+                textField.placeholder = @"密文现实的密码";
+                textField.secureTextEntry = YES;
+            }];
+            FRAlertAction *makesureAction = [FRAlertAction actionWithTitle:@"确定" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+            }];
+            FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                
+            }];
+            FRAlertAction *seeAction = [FRAlertAction actionWithTitle:@"哈哈哈" style:FRAlertActionStyleBorder color:[self randomColor] handler:^(FRAlertAction * _Nonnull action) {
+                NSLog(@"%s",__func__);
+                action.enabled = NO;
+            }];
+            
+            [alertController addAction:cancleAction];
+            [alertController addAction:makesureAction];
+            [alertController addAction:seeAction];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+            break;
         default:
             break;
     }
@@ -211,7 +239,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"系统样式",@"提醒",@"仅标题的提醒",@"仅描述的提醒",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒",@"日期选择器",@"数组选取"];
+        _alertArray = @[@"系统样式",@"提醒",@"仅标题的提醒",@"仅描述的提醒",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒",@"日期选择器",@"数组选取",@"textField"];
     }
     return _alertArray;
 }

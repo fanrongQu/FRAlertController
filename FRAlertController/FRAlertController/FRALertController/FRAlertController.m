@@ -8,7 +8,7 @@
 
 #import "FRAlertController.h"
 
-@interface FRAlertController ()<UITableViewDataSource,UITableViewDelegate>
+@interface FRAlertController ()<UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
 
 /**  alert类型  */
 @property (nonatomic, assign) FRAlertControllerStyle alertPreferredStyle;
@@ -31,9 +31,11 @@
 /**  滚动选项视图  */
 @property (nonatomic, strong) UITableView *tableView;
 
-@property (nonatomic, copy) FRAlertDatePickerBlock alertDatePickerBlock;
+/**  textfield数组  */
+@property (nonatomic, strong) NSMutableArray *mutableTextFields;
 
-@property (nonatomic, copy) FRAlertTextFieldBlock alertTextFieldBlock;
+
+@property (nonatomic, copy) FRAlertDatePickerBlock alertDatePickerBlock;
 
 @property (nonatomic, copy) FRAlertArrayBlock alertArrayBlock;
 
@@ -61,7 +63,7 @@
     if (_mutableActions != nil) _mutableActions = nil;
     if (_buttons != nil) _buttons = nil;
     if (_datePicker != nil) _datePicker = nil;
-    if (_textFields != nil) _textFields = nil;
+    if (_mutableTextFields != nil) _mutableTextFields = nil;
     if (_alertArray != nil) _alertArray = nil;
 }
 
@@ -103,7 +105,7 @@
     [super viewWillAppear:animated];
     
     //布局button
-    [self layoutButtons];
+    if (self.alertArray.count < 1) [self layoutViews];
     
 }
 
@@ -127,6 +129,14 @@
 //    [UIView animateWithDuration:0.1 animations:^{
         weakSelf.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0);
 //    }];
+}
+
+- (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
+    if (self.textFields.count > 0) {
+        for (UITextField *textField in _mutableTextFields) {
+            [textField resignFirstResponder];
+        }
+    }
 }
 
 
@@ -191,8 +201,24 @@
     
     UITextField *textField = [[UITextField alloc] init];
     textField.placeholder = placeholder;
+    textField.font = [UIFont systemFontOfSize:13];
+    UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 10)];
+    [textField setLeftView:leftView];
+    textField.leftViewMode = UITextFieldViewModeAlways;
+    [textField setLayerWithCornerRadius:3.0 borderWidth:0.5 borderColor:[UIColor blackColor]];
+    textField.delegate = self;
+    //添加到mutableTextFields数组
+    [self.mutableTextFields addObject:textField];
     
-    self.alertTextFieldBlock = configurationHandler;
+    // 添加到父视图
+    [self.alertView addSubview:textField];
+    
+    //仅支持FRAlertControllerStyleAlert
+    self.alertPreferredStyle = FRAlertControllerStyleAlert;
+    //弹出动画
+    [self setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
+    configurationHandler(textField);
 }
 
 /**
@@ -221,7 +247,14 @@
 //    [self.datePicker setMaximumDate:maximumDate];
 //    if (defaultDate) [self.datePicker setDate:defaultDate animated:NO];
     [self datePicker];
+    
+    //仅支持FRAlertControllerStyleAlert
+    self.alertPreferredStyle = FRAlertControllerStyleAlert;
+    //弹出动画
+    [self setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
     self.alertDatePickerBlock = configurationHandler;
+    configurationHandler(self.datePicker);
 }
 
 
@@ -234,6 +267,12 @@
 - (void)addSelectArray:(nonnull NSArray *)array configurationHandler:(nonnull FRAlertArrayBlock)configurationHandler {
     
     self.alertArray = array;
+    
+    //仅支持FRAlertControllerStyleAlert
+    self.alertPreferredStyle = FRAlertControllerStyleAlert;
+    //弹出动画
+    [self setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
+    
     self.alertArrayBlock = configurationHandler;
 }
 
@@ -250,22 +289,22 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)layoutButtons {
+- (void)layoutViews {
     // 根据当前button的数量来布局
     switch (self.buttons.count) {
         case 2:{
             if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
                 //垂直布局
-                [self layoutButtonsVertical];
+                [self layoutViewsVertical];
             }else {
                 //水平布局
-                [self layoutButtonsHorizontal];
+                [self layoutViewsHorizontal];
             }
         }
             break;
         default:{
             //垂直布局
-            [self layoutButtonsVertical];
+            [self layoutViewsVertical];
         }
             break;
     }
@@ -273,14 +312,20 @@
 
 
 /** 两个 button 时的水平布局 */
-- (void)layoutButtonsHorizontal {
+- (void)layoutViewsHorizontal {
     
     UIButton *leftButton = self.buttons[0];
     UIButton *rightButton = self.buttons[1];
     if (_datePicker) {
         
         [leftButton setAutoLayoutTopToViewBottom:self.datePicker constant:12];
+    }else if (self.textFields.count > 0) {
+        
+        [self layoutTextField];
+        UITextField *view = self.mutableTextFields[_mutableTextFields.count - 1];;
+        [leftButton setAutoLayoutTopToViewBottom:view constant:12];
     }else if (self.message) {
+        
         [leftButton setAutoLayoutTopToViewBottom:self.messageLabel constant:12];
     }else if (self.title) {
         
@@ -305,9 +350,12 @@
 
 
 /** 垂直布局 */
-- (void)layoutButtonsVertical {
+- (void)layoutViewsVertical {
     // 记录最下面的一个view
     UIView *lastView;
+    
+    // 遍历在数组中的textField，添加到alert上
+    
     
     // 遍历在数组中的button，添加到alert上
     NSInteger count = self.buttons.count;
@@ -317,6 +365,9 @@
         if(!lastView) {
             if (_datePicker) {
                 lastView = self.datePicker;
+            }else if (self.textFields.count > 0) {
+                [self layoutTextField];
+                lastView = self.mutableTextFields[_mutableTextFields.count - 1];
             }else if (self.message) {
                 lastView = self.messageLabel;
             }else if (self.title) {
@@ -349,6 +400,42 @@
         [button setLayerWithCornerRadius:0 borderWidth:0 borderColor:nil];
         
         lastView = button;
+    }
+}
+
+
+- (void)layoutTextField {
+    // 记录最下面的一个view
+    UIView *lastView;
+    
+    // 遍历在数组中的textField，添加到alert上
+    NSInteger count = self.mutableTextFields.count;
+    for (int n = 0; n < count; n++) {
+        NSLog(@"0000");
+        
+        UITextField *textField = self.mutableTextFields[n];
+        if(!lastView) {
+            if (_datePicker) {
+                lastView = self.datePicker;
+            }else if (self.message) {
+                lastView = self.messageLabel;
+            }else if (self.title) {
+                lastView = self.titleLabel;
+            }else {
+                lastView = self.alertView;
+            }
+            [textField setAutoLayoutTopToViewBottom:lastView constant:12];
+        }else {
+            [textField setAutoLayoutTopToViewBottom:lastView constant:10];
+        }
+        [textField setAutoLayoutLeftToViewLeft:self.alertView constant:20];
+        [textField setAutoLayoutRightToViewRight:self.alertView constant:-20];
+        [textField setAutoLayoutHeight:30];
+        if ((n == count - 1)&&self.buttons.count == 0) {
+            [textField setAutoLayoutBottomToViewBottom:self.alertView constant:-15];
+        }
+        
+        lastView = textField;
     }
 }
 
@@ -388,6 +475,13 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+#pragma mark - textField delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    
+    return YES;
+}
+
 
 #pragma mark - 数据处理
 - (NSMutableArray *)mutableActions {
@@ -404,6 +498,13 @@
     return _buttons;
 }
 
+- (NSMutableArray *)mutableTextFields {
+    if (!_mutableTextFields) {
+        _mutableTextFields = [[NSMutableArray alloc]init];
+    }
+    return _mutableTextFields;
+}
+
 - (NSArray<FRAlertAction *> *)actions {
     
     return _mutableActions;
@@ -411,6 +512,11 @@
 
 - (FRAlertControllerStyle)preferredStyle {
     return _alertPreferredStyle;
+}
+
+
+- (NSArray<UITextField *> *)textFields {
+    return _mutableTextFields;
 }
 
 #pragma mark - 视图懒加载
@@ -444,7 +550,7 @@
         [_titleLabel setAutoLayoutTopToViewTop:self.alertView constant:12];
         [_titleLabel setAutoLayoutLeftToViewLeft:self.alertView constant:15];
         [_titleLabel setAutoLayoutRightToViewRight:self.alertView constant:-15];
-        if (self.buttons.count < 1 && !self.message && self.alertArray.count < 1) {
+        if (self.buttons.count < 1 && !self.message && self.alertArray.count < 1 && self.mutableTextFields.count < 1) {
             [_titleLabel setAutoLayoutBottomToViewBottom:self.alertView constant:-12];
         }
         
@@ -469,7 +575,7 @@
         [_messageLabel setAutoLayoutLeftToViewLeft:self.alertView constant:15];
         [_messageLabel setAutoLayoutRightToViewRight:self.alertView constant:-15];
         
-        if (self.buttons.count < 1) {
+        if (self.buttons.count < 1 && self.alertArray.count < 1 && self.mutableTextFields.count < 1) {
             [_messageLabel setAutoLayoutBottomToViewBottom:self.alertView constant:-12];
         }
         _messageLabel.font = [UIFont systemFontOfSize:14];
