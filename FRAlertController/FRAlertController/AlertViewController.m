@@ -189,10 +189,10 @@
         case 10: {
             
             FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:FRAlertControllerStyleAlert];
-            [alertController addTextFieldWithPlaceholder:@"用户名" configurationHandler:^(UITextField * _Nonnull textField) {
+            [alertController addTextFieldConfigurationHandler:^(UITextField * _Nonnull textField) {
                 textField.placeholder = @"修改了的用户名";
             }];
-            [alertController addTextFieldWithPlaceholder:@"密码" configurationHandler:^(UITextField * _Nonnull textField) {
+            [alertController addTextFieldConfigurationHandler:^(UITextField * _Nonnull textField) {
                 
                 textField.placeholder = @"密文现实的密码";
                 textField.secureTextEntry = YES;

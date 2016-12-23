@@ -35,7 +35,7 @@ typedef void (^ FRAlertArrayBlock)(NSInteger row);
 @property (nonatomic, readonly, nullable) NSArray<FRAlertAction *> *actions;
 
 
-- (void)addTextFieldWithPlaceholder:(nonnull NSString *)placeholder configurationHandler:(nonnull FRAlertTextFieldBlock)configurationHandler;
+- (void)addTextFieldConfigurationHandler:(nonnull FRAlertTextFieldBlock)configurationHandler;
 
 @property (nullable, nonatomic, readonly) NSArray<UITextField *> *textFields;
 

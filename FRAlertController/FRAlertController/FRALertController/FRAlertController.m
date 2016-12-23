@@ -197,10 +197,9 @@
     [self.alertView addSubview:actionButton];
 }
 
-- (void)addTextFieldWithPlaceholder:(nonnull NSString *)placeholder configurationHandler:(nonnull FRAlertTextFieldBlock)configurationHandler {
+- (void)addTextFieldConfigurationHandler:(nonnull FRAlertTextFieldBlock)configurationHandler {
     
     UITextField *textField = [[UITextField alloc] init];
-    textField.placeholder = placeholder;
     textField.font = [UIFont systemFontOfSize:13];
     UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 10)];
     [textField setLeftView:leftView];
