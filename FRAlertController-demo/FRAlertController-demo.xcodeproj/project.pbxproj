@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3BA925861E012BA900E49B46 /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BA925851E012BA900E49B46 /* close@2x.png */; };
+		3B7474701E110A7D0001367B /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7474671E110A7D0001367B /* close@2x.png */; };
+		3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7474691E110A7D0001367B /* FRAlertAction.m */; };
+		3B7474721E110A7D0001367B /* FRAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746B1E110A7D0001367B /* FRAlertController.m */; };
+		3B7474731E110A7D0001367B /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746D1E110A7D0001367B /* UIView+AutoLayout.m */; };
+		3B7474741E110A7D0001367B /* UIView+Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746F1E110A7D0001367B /* UIView+Layer.m */; };
 		3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */; };
 		3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */; };
 		3BF5F2021DFBD1B1005BCAEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2011DFBD1B1005BCAEC /* main.m */; };
@@ -16,19 +20,23 @@
 		3BF5F20B1DFBD1B1005BCAEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5F2091DFBD1B1005BCAEC /* Main.storyboard */; };
 		3BF5F20D1DFBD1B1005BCAEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5F20C1DFBD1B1005BCAEC /* Assets.xcassets */; };
 		3BF5F2101DFBD1B1005BCAEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5F20E1DFBD1B1005BCAEC /* LaunchScreen.storyboard */; };
-		3BF5F21A1DFBD3C5005BCAEC /* FRAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2191DFBD3C5005BCAEC /* FRAlertController.m */; };
-		3BF5F21D1DFBF2FF005BCAEC /* FRAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F21C1DFBF2FF005BCAEC /* FRAlertAction.m */; };
-		3BF5F2231DFBFBBE005BCAEC /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2221DFBFBBE005BCAEC /* UIView+AutoLayout.m */; };
-		3BF5F2261DFC0451005BCAEC /* UIView+Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2251DFC0451005BCAEC /* UIView+Layer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3BA925851E012BA900E49B46 /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		3B7474671E110A7D0001367B /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
+		3B7474681E110A7D0001367B /* FRAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAlertAction.h; sourceTree = "<group>"; };
+		3B7474691E110A7D0001367B /* FRAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertAction.m; sourceTree = "<group>"; };
+		3B74746A1E110A7D0001367B /* FRAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAlertController.h; sourceTree = "<group>"; };
+		3B74746B1E110A7D0001367B /* FRAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertController.m; sourceTree = "<group>"; };
+		3B74746C1E110A7D0001367B /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
+		3B74746D1E110A7D0001367B /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
+		3B74746E1E110A7D0001367B /* UIView+Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layer.h"; sourceTree = "<group>"; };
+		3B74746F1E110A7D0001367B /* UIView+Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layer.m"; sourceTree = "<group>"; };
 		3BDF9F9C1DFFD6A400C20263 /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
 		3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
 		3BDF9F9F1DFFD75800C20263 /* ActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetViewController.h; sourceTree = "<group>"; };
 		3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActionSheetViewController.m; sourceTree = "<group>"; };
-		3BF5F1FD1DFBD1B1005BCAEC /* FRAlertController.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FRAlertController.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BF5F1FD1DFBD1B1005BCAEC /* FRAlertController-demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FRAlertController-demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BF5F2011DFBD1B1005BCAEC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3BF5F2031DFBD1B1005BCAEC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3BF5F2041DFBD1B1005BCAEC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -38,14 +46,6 @@
 		3BF5F20C1DFBD1B1005BCAEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BF5F20F1DFBD1B1005BCAEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BF5F2111DFBD1B1005BCAEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		3BF5F2181DFBD3C5005BCAEC /* FRAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAlertController.h; sourceTree = "<group>"; };
-		3BF5F2191DFBD3C5005BCAEC /* FRAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertController.m; sourceTree = "<group>"; };
-		3BF5F21B1DFBF2FF005BCAEC /* FRAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAlertAction.h; sourceTree = "<group>"; };
-		3BF5F21C1DFBF2FF005BCAEC /* FRAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertAction.m; sourceTree = "<group>"; };
-		3BF5F2211DFBFBBE005BCAEC /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
-		3BF5F2221DFBFBBE005BCAEC /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
-		3BF5F2241DFC0451005BCAEC /* UIView+Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layer.h"; sourceTree = "<group>"; };
-		3BF5F2251DFC0451005BCAEC /* UIView+Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layer.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +59,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B7474661E110A7D0001367B /* FRALertController */ = {
+			isa = PBXGroup;
+			children = (
+				3B7474671E110A7D0001367B /* close@2x.png */,
+				3B7474681E110A7D0001367B /* FRAlertAction.h */,
+				3B7474691E110A7D0001367B /* FRAlertAction.m */,
+				3B74746A1E110A7D0001367B /* FRAlertController.h */,
+				3B74746B1E110A7D0001367B /* FRAlertController.m */,
+				3B74746C1E110A7D0001367B /* UIView+AutoLayout.h */,
+				3B74746D1E110A7D0001367B /* UIView+AutoLayout.m */,
+				3B74746E1E110A7D0001367B /* UIView+Layer.h */,
+				3B74746F1E110A7D0001367B /* UIView+Layer.m */,
+			);
+			name = FRALertController;
+			path = ../../FRALertController;
+			sourceTree = "<group>";
+		};
 		3BF5F1F41DFBD1B1005BCAEC = {
 			isa = PBXGroup;
 			children = (
@@ -70,7 +87,7 @@
 		3BF5F1FE1DFBD1B1005BCAEC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3BF5F1FD1DFBD1B1005BCAEC /* FRAlertController.app */,
+				3BF5F1FD1DFBD1B1005BCAEC /* FRAlertController-demo.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -86,7 +103,7 @@
 				3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */,
 				3BDF9F9F1DFFD75800C20263 /* ActionSheetViewController.h */,
 				3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */,
-				3BF5F2171DFBD3A8005BCAEC /* FRALertController */,
+				3B7474661E110A7D0001367B /* FRALertController */,
 				3BF5F2091DFBD1B1005BCAEC /* Main.storyboard */,
 				3BF5F20C1DFBD1B1005BCAEC /* Assets.xcassets */,
 				3BF5F20E1DFBD1B1005BCAEC /* LaunchScreen.storyboard */,
@@ -104,28 +121,12 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		3BF5F2171DFBD3A8005BCAEC /* FRALertController */ = {
-			isa = PBXGroup;
-			children = (
-				3BA925851E012BA900E49B46 /* close@2x.png */,
-				3BF5F2181DFBD3C5005BCAEC /* FRAlertController.h */,
-				3BF5F2191DFBD3C5005BCAEC /* FRAlertController.m */,
-				3BF5F21B1DFBF2FF005BCAEC /* FRAlertAction.h */,
-				3BF5F21C1DFBF2FF005BCAEC /* FRAlertAction.m */,
-				3BF5F2241DFC0451005BCAEC /* UIView+Layer.h */,
-				3BF5F2251DFC0451005BCAEC /* UIView+Layer.m */,
-				3BF5F2211DFBFBBE005BCAEC /* UIView+AutoLayout.h */,
-				3BF5F2221DFBFBBE005BCAEC /* UIView+AutoLayout.m */,
-			);
-			path = FRALertController;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3BF5F1FC1DFBD1B1005BCAEC /* FRAlertController */ = {
+		3BF5F1FC1DFBD1B1005BCAEC /* FRAlertController-demo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3BF5F2141DFBD1B1005BCAEC /* Build configuration list for PBXNativeTarget "FRAlertController" */;
+			buildConfigurationList = 3BF5F2141DFBD1B1005BCAEC /* Build configuration list for PBXNativeTarget "FRAlertController-demo" */;
 			buildPhases = (
 				3BF5F1F91DFBD1B1005BCAEC /* Sources */,
 				3BF5F1FA1DFBD1B1005BCAEC /* Frameworks */,
@@ -135,9 +136,9 @@
 			);
 			dependencies = (
 			);
-			name = FRAlertController;
+			name = "FRAlertController-demo";
 			productName = FRAlertController;
-			productReference = 3BF5F1FD1DFBD1B1005BCAEC /* FRAlertController.app */;
+			productReference = 3BF5F1FD1DFBD1B1005BCAEC /* FRAlertController-demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -155,7 +156,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3BF5F1F81DFBD1B1005BCAEC /* Build configuration list for PBXProject "FRAlertController" */;
+			buildConfigurationList = 3BF5F1F81DFBD1B1005BCAEC /* Build configuration list for PBXProject "FRAlertController-demo" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -168,7 +169,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3BF5F1FC1DFBD1B1005BCAEC /* FRAlertController */,
+				3BF5F1FC1DFBD1B1005BCAEC /* FRAlertController-demo */,
 			);
 		};
 /* End PBXProject section */
@@ -181,7 +182,7 @@
 				3BF5F2101DFBD1B1005BCAEC /* LaunchScreen.storyboard in Resources */,
 				3BF5F20D1DFBD1B1005BCAEC /* Assets.xcassets in Resources */,
 				3BF5F20B1DFBD1B1005BCAEC /* Main.storyboard in Resources */,
-				3BA925861E012BA900E49B46 /* close@2x.png in Resources */,
+				3B7474701E110A7D0001367B /* close@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,13 +194,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BF5F2081DFBD1B1005BCAEC /* ViewController.m in Sources */,
-				3BF5F2231DFBFBBE005BCAEC /* UIView+AutoLayout.m in Sources */,
-				3BF5F21D1DFBF2FF005BCAEC /* FRAlertAction.m in Sources */,
+				3B7474731E110A7D0001367B /* UIView+AutoLayout.m in Sources */,
 				3BF5F2051DFBD1B1005BCAEC /* AppDelegate.m in Sources */,
-				3BF5F21A1DFBD3C5005BCAEC /* FRAlertController.m in Sources */,
+				3B7474721E110A7D0001367B /* FRAlertController.m in Sources */,
+				3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */,
 				3BF5F2021DFBD1B1005BCAEC /* main.m in Sources */,
-				3BF5F2261DFC0451005BCAEC /* UIView+Layer.m in Sources */,
 				3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */,
+				3B7474741E110A7D0001367B /* UIView+Layer.m in Sources */,
 				3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -339,7 +340,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3BF5F1F81DFBD1B1005BCAEC /* Build configuration list for PBXProject "FRAlertController" */ = {
+		3BF5F1F81DFBD1B1005BCAEC /* Build configuration list for PBXProject "FRAlertController-demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3BF5F2121DFBD1B1005BCAEC /* Debug */,
@@ -348,7 +349,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3BF5F2141DFBD1B1005BCAEC /* Build configuration list for PBXNativeTarget "FRAlertController" */ = {
+		3BF5F2141DFBD1B1005BCAEC /* Build configuration list for PBXNativeTarget "FRAlertController-demo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3BF5F2151DFBD1B1005BCAEC /* Debug */,
