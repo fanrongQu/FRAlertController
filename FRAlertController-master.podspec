@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary      = "A modeled system UIAlertController to achieve FRAlertController"
   s.homepage     = "https://github.com/fanrongQu/FRAlertController-master"
   s.license      = "MIT"
-  s.author             = { "FR" => "1366225686@qq.com" }
+  s.author       = { "FR" => "1366225686@qq.com" }
   s.source       = { :git => "https://github.com/fanrongQu/FRAlertController-master.git", :tag => s.version }
   s.source_files  = "FRAlertController"
   s.requires_arc = true
