@@ -327,10 +327,10 @@ UIPickerViewDelegate>
         [leftButton setAutoLayoutTopToViewBottom:view constant:12];
     }else if (self.message) {
         
-        [leftButton setAutoLayoutTopToViewBottom:self.messageLabel constant:12];
+        [leftButton setAutoLayoutTopToViewBottom:self.messageLabel constant:15];
     }else if (self.title) {
         
-        [leftButton setAutoLayoutTopToViewBottom:self.titleLabel constant:12];
+        [leftButton setAutoLayoutTopToViewBottom:self.titleLabel constant:15];
     }else {
         
         [leftButton setAutoLayoutTopToViewTop:self.alertView constant:16];
@@ -379,11 +379,11 @@ UIPickerViewDelegate>
                 [button setAutoLayoutTopToViewBottom:lastView constant:12];
             }else if (self.message) {
                 lastView = self.messageLabel;
-                [button setAutoLayoutTopToViewBottom:lastView constant:12];
+                [button setAutoLayoutTopToViewBottom:lastView constant:15];
             }else if (self.title) {
                 
                 lastView = self.titleLabel;
-                [button setAutoLayoutTopToViewBottom:lastView constant:12];
+                [button setAutoLayoutTopToViewBottom:lastView constant:15];
             }else {
                 
                 lastView = self.alertView;
@@ -962,9 +962,9 @@ UIPickerViewDelegate>
                 [_alertView setAutoLayoutRightToViewRight:self.view constant:0];
             }else {
                 //创建距左边的约束
-                [_alertView setAutoLayoutLeftToViewLeft:self.view constant:20];
+                [_alertView setAutoLayoutLeftToViewLeft:self.view constant:10];
                 //创建距右边的约束
-                [_alertView setAutoLayoutRightToViewRight:self.view constant:-20];
+                [_alertView setAutoLayoutRightToViewRight:self.view constant:-10];
                 [_alertView setLayerWithCornerRadius:5.0];
             }
         }else {
@@ -1019,10 +1019,9 @@ UIPickerViewDelegate>
         if (self.buttons.count < 1 && self.alertArray.count < 1 && self.mutableTextFields.count < 1 && !self.payMoney) {
             [_messageLabel setAutoLayoutBottomToViewBottom:self.alertView constant:-15];
         }
-        _messageLabel.font = [UIFont systemFontOfSize:14];
+        _messageLabel.font = [UIFont systemFontOfSize:13];
         _messageLabel.numberOfLines = 0;
         _messageLabel.textAlignment = NSTextAlignmentCenter;
-
     }
     return _messageLabel;
 }
