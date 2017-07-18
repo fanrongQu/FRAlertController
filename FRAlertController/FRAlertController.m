@@ -116,7 +116,7 @@ UIPickerViewDelegate>
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self alertView];
+//    [self alertView];
     if (self.title.length > 0) self.titleLabel.text = self.title;
     
     if (self.alertArray.count > 0) {
@@ -143,11 +143,17 @@ UIPickerViewDelegate>
         [self.closeBtn addTarget:self action:@selector(closeDataPicker) forControlEvents:UIControlEventTouchUpInside];
     }
     
+    self.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0);
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
     if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
-       
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.2 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+        
+        __weak typeof(self) weakSelf = self;
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
             
-            __weak typeof(self) weakSelf = self;
             [UIView animateWithDuration:0.1 animations:^{
                 weakSelf.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0.3);
             }];
@@ -155,11 +161,6 @@ UIPickerViewDelegate>
     }else {
         self.view.backgroundColor = FRUIColor_RGB(0, 0, 0, 0.35);
     }
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    
     //布局button
     if (self.alertArray.count < 1||_payMoney.length > 0) [self layoutViews];
 }
@@ -213,7 +214,9 @@ UIPickerViewDelegate>
 }
 /**  ----- 参考系统创建alertController -----  */
 - (void)show {
-    [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:self animated:YES completion:nil];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [[UIApplication sharedApplication].keyWindow.rootViewController presentViewController:self animated:YES completion:nil];
+    });
 }
 
 
@@ -412,19 +415,24 @@ UIPickerViewDelegate>
         
         lastView = button;
     }
-    if (_alertPreferredStyle == FRAlertControllerStyleActionSheet && self.cancleButton) {
+    if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
         
-        //修改alertView距底部的约束
-        [_alertView setAutoLayoutBottomToViewBottom:self.view constant:-60];
-        
-        [self.buttons removeObject:self.cancleButton];
-        [self.cancleButton removeFromSuperview];
-        [self.view addSubview:self.cancleButton];
-        
-        [self.cancleButton setAutoLayoutTopToViewBottom:self.alertView constant:10];
-        [self.cancleButton setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-        [self.cancleButton setAutoLayoutRightToViewRight:self.alertView constant:0];
-        [self.cancleButton setAutoLayoutHeight:40];
+        if (self.cancleButton) {
+            //修改alertView距底部的约束
+            [_alertView setAutoLayoutBottomToViewBottom:self.view constant:-60];
+            
+            [self.buttons removeObject:self.cancleButton];
+            [self.cancleButton removeFromSuperview];
+            [self.view addSubview:self.cancleButton];
+            
+            [self.cancleButton setAutoLayoutTopToViewBottom:self.alertView constant:10];
+            [self.cancleButton setAutoLayoutLeftToViewLeft:self.alertView constant:0];
+            [self.cancleButton setAutoLayoutRightToViewRight:self.alertView constant:0];
+            [self.cancleButton setAutoLayoutHeight:40];
+        }else {
+            //创建距底部的约束
+            [_alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
+        }
     }
 }
 /**  ----- 为alertController添加按钮（action） -----  */
@@ -951,9 +959,6 @@ UIPickerViewDelegate>
         _alertView = [[UIView alloc]init];
         [self.view addSubview:_alertView];
         if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
-            
-            //创建距底部的约束
-            [_alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
             
             if(self.payMoney) {
                 //创建距左边的约束
