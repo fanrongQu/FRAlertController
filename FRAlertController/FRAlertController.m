@@ -149,7 +149,7 @@ UIPickerViewDelegate>
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+    if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
         
         __weak typeof(self) weakSelf = self;
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.3 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
@@ -288,18 +288,18 @@ UIPickerViewDelegate>
 }
 
 - (void)layoutViews {
-    if (_alertPreferredStyle == FRAlertControllerStyleActionSheet && self.cancleButton) {
+    if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet && self.cancleButton) {
         [self.buttons removeObject:self.cancleButton];
     }
     // 根据当前button的数量来布局
     switch (self.buttons.count) {
         case 2:{
-            if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
-                //垂直布局
-                [self layoutViewsVertical];
-            }else {
+            if (self.alertPreferredStyle == FRAlertControllerStyleAlert || _datePicker || _pickerView) {
                 //水平布局
                 [self layoutViewsHorizontal];
+            }else {
+                //垂直布局
+                [self layoutViewsVertical];
             }
         }
             break;
@@ -348,6 +348,10 @@ UIPickerViewDelegate>
     [rightButton setAutoLayoutBottomToViewBottom:leftButton constant:0];
     [rightButton setAutoLayoutRightToViewRight:self.alertView constant:-15];
     [rightButton setAutoLayoutWidthToView:leftButton constant:0];
+    //创建距底部的约束
+    if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+        [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
+    }
     
     [self.alertView setNeedsLayout];
 }
@@ -415,24 +419,23 @@ UIPickerViewDelegate>
         
         lastView = button;
     }
-    if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+    if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet && self.cancleButton) {
         
-        if (self.cancleButton) {
-            //修改alertView距底部的约束
-            [_alertView setAutoLayoutBottomToViewBottom:self.view constant:-60];
-            
-            [self.buttons removeObject:self.cancleButton];
-            [self.cancleButton removeFromSuperview];
-            [self.view addSubview:self.cancleButton];
-            
-            [self.cancleButton setAutoLayoutTopToViewBottom:self.alertView constant:10];
-            [self.cancleButton setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-            [self.cancleButton setAutoLayoutRightToViewRight:self.alertView constant:0];
-            [self.cancleButton setAutoLayoutHeight:40];
-        }else {
-            //创建距底部的约束
-            [_alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
-        }
+        //修改alertView距底部的约束
+        [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-60];
+        
+        [self.buttons removeObject:self.cancleButton];
+        [self.cancleButton removeFromSuperview];
+        [self.view addSubview:self.cancleButton];
+        
+        [self.cancleButton setAutoLayoutTopToViewBottom:self.alertView constant:10];
+        [self.cancleButton setAutoLayoutLeftToViewLeft:self.alertView constant:0];
+        [self.cancleButton setAutoLayoutRightToViewRight:self.alertView constant:0];
+        [self.cancleButton setAutoLayoutHeight:40];
+        
+    }else {
+        //创建距底部的约束
+        [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
     }
 }
 /**  ----- 为alertController添加按钮（action） -----  */
@@ -542,8 +545,6 @@ UIPickerViewDelegate>
     //    if (defaultDate) [self.datePicker setDate:defaultDate animated:NO];
     [self datePicker];
     
-    //仅支持FRAlertControllerStyleAlert
-    self.alertPreferredStyle = FRAlertControllerStyleAlert;
     //弹出动画
     [self setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
@@ -606,8 +607,6 @@ UIPickerViewDelegate>
     }
     [self pickerView];
     
-    //仅支持FRAlertControllerStyleAlert
-    self.alertPreferredStyle = FRAlertControllerStyleAlert;
     //弹出动画
     [self setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     
@@ -903,7 +902,7 @@ UIPickerViewDelegate>
 
 #pragma mark - 数据处理
 - (FRAlertControllerStyle)preferredStyle {
-    return _alertPreferredStyle;
+    return self.alertPreferredStyle;
 }
 
 /**  ----- 为alertController添加按钮（action） -----  */
@@ -958,7 +957,7 @@ UIPickerViewDelegate>
     if (!_alertView) {
         _alertView = [[UIView alloc]init];
         [self.view addSubview:_alertView];
-        if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+        if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
             
             if(self.payMoney) {
                 //创建距左边的约束
@@ -1151,7 +1150,7 @@ UIPickerViewDelegate>
         
         CGFloat height = 40;
         CGFloat width = height;
-        if (_alertPreferredStyle == FRAlertControllerStyleActionSheet) {
+        if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
             [_pwdInputView setAutoLayoutBottomToViewBottom:self.alertView constant:-260];
             
             CGSize screenSize = [UIScreen mainScreen].bounds.size;
