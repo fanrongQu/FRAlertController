@@ -64,20 +64,24 @@ typedef void (^FRAlertPassWardBlock)(NSString *__nonnull passWord);
  @param message 描述
  @param preferredStyle alertController类型
  @param color 确定按钮颜色
+ @param cancleTitle 取消按钮标题
+ @param makeSureTitle 确认按钮标题
  @param style 确定按钮类型
  @param configurationHandler 日期选择器回调
  
  @return alertController
  */
-+ (nonnull FRAlertController *)showDatePickerController:(nonnull UIViewController *)controller title:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle datePickerColor:(nullable UIColor *)color datePickerStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler;
++ (nonnull FRAlertController *)showDatePickerController:(nonnull UIViewController *)controller title:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle datePickerColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle datePickerStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler;
 /**
  添加日期选择器(默认选中日期为今天  最小日期默认为1900/01/01  最大日期默认为当前日期)
  
  @param color 确定按钮颜色
+ @param cancleTitle 取消按钮标题
+ @param makeSureTitle 确认按钮标题
  @param style 确定按钮类型
  @param configurationHandler 日期选择器回调
  */
-- (void)addDatePickerWithColor:(nullable UIColor *)color style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler;
+- (void)addDatePickerWithColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler;
 
 /**  日期选择器  */
 @property (nonatomic, strong, nullable) UIDatePicker *datePicker;
@@ -94,11 +98,13 @@ typedef void (^FRAlertPassWardBlock)(NSString *__nonnull passWord);
  @param preferredStyle 显示样式
  @param pickerArray 选择数组(二维数组奥)
  @param color 确认按钮颜色
+ @param cancleTitle 取消按钮标题
+ @param makeSureTitle 确认按钮标题
  @param style 按钮样式
  @param configurationHandler 回调
  @return FRAlertController对象
  */
-+ (nonnull FRAlertController *)showPickerViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle  pickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color pickerViewStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler;
++ (nonnull FRAlertController *)showPickerViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle  pickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle pickerViewStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler;
 
 
 /**
@@ -106,10 +112,12 @@ typedef void (^FRAlertPassWardBlock)(NSString *__nonnull passWord);
  
  @param pickerArray 选择数组
  @param color 确认按钮颜色
+ @param cancleTitle 取消按钮标题
+ @param makeSureTitle 确认按钮标题
  @param style 按钮样式
  @param configurationHandler 回调
  */
-- (void)addPickerViewWithPickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler;
+- (void)addPickerViewWithPickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler;
 
 /**  选择器  */
 @property (nonatomic, strong, nullable) UIPickerView *pickerView;

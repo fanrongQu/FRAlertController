@@ -504,7 +504,7 @@ UIPickerViewDelegate>
 
 #pragma mark - AlertDatePicker
 /**  ----- 为alertController添加日期选择器（DatePicker） -----  */
-+ (nonnull FRAlertController *)showDatePickerController:(nonnull UIViewController *)controller title:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle datePickerColor:(nullable UIColor *)color datePickerStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler {
++ (nonnull FRAlertController *)showDatePickerController:(nonnull UIViewController *)controller title:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle datePickerColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle datePickerStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler {
     FRAlertController *alertController = [[FRAlertController alloc] init];
     alertController.title = title;
     alertController.message = message;
@@ -517,7 +517,7 @@ UIPickerViewDelegate>
         //弹出动画
         [alertController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     }
-    [alertController addDatePickerWithColor:color style:style configurationHandler:configurationHandler];
+    [alertController addDatePickerWithColor:color cancleTitle:cancleTitle makeSureTitle:makeSureTitle style:style configurationHandler:configurationHandler];
     
     [alertController show];
     
@@ -525,12 +525,12 @@ UIPickerViewDelegate>
 }
 
 
-- (void)addDatePickerWithColor:(nullable UIColor *)color style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler {
+- (void)addDatePickerWithColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertDatePickerBlock)configurationHandler {
     
     __weak typeof(self) weakSelf = self;
-    FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[UIColor redColor] handler:nil];
+    FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:cancleTitle?cancleTitle:@"取消" style:FRAlertActionStyleColor color:[UIColor redColor] handler:nil];
     
-    FRAlertAction *makeSureAction = [FRAlertAction actionWithTitle:@"确定" style:style color:color handler:^(FRAlertAction * _Nonnull action) {
+    FRAlertAction *makeSureAction = [FRAlertAction actionWithTitle:makeSureTitle?makeSureTitle:@"确定" style:style color:color handler:^(FRAlertAction * _Nonnull action) {
         
         if(weakSelf.alertDatePickerBlock) weakSelf.alertDatePickerBlock(self.datePicker);
     }];
@@ -563,11 +563,13 @@ UIPickerViewDelegate>
  @param preferredStyle 显示样式
  @param pickerArray 选择数组(二维数组奥)
  @param color 确认按钮颜色
+ @param cancleTitle 取消按钮标题
+ @param makeSureTitle 确认按钮标题
  @param style 按钮样式
  @param configurationHandler 回调
  @return FRAlertController对象
  */
-+ (nonnull FRAlertController *)showPickerViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle  pickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color pickerViewStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler {
++ (nonnull FRAlertController *)showPickerViewWithTitle:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle  pickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle pickerViewStyle:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler {
     FRAlertController *alertController = [[FRAlertController alloc] init];
     alertController.title = title;
     alertController.message = message;
@@ -580,7 +582,7 @@ UIPickerViewDelegate>
         //弹出动画
         [alertController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];
     }
-    [alertController addPickerViewWithPickerArray:pickerArray pickerButtonColor:color style:style configurationHandler:configurationHandler];
+    [alertController addPickerViewWithPickerArray:pickerArray pickerButtonColor:color cancleTitle:cancleTitle makeSureTitle:makeSureTitle style:style configurationHandler:configurationHandler];
     
     [alertController show];
     
@@ -588,12 +590,12 @@ UIPickerViewDelegate>
 }
 
 
-- (void)addPickerViewWithPickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler {
+- (void)addPickerViewWithPickerArray:(NSArray *_Nullable)pickerArray pickerButtonColor:(nullable UIColor *)color cancleTitle:(NSString *_Nullable)cancleTitle makeSureTitle:(NSString *_Nullable)makeSureTitle style:(FRAlertActionStyle)style configurationHandler:(nonnull FRAlertPickerViewBlock)configurationHandler {
     
     __weak typeof(self) weakSelf = self;
-    FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:@"取消" style:FRAlertActionStyleColor color:[UIColor redColor] handler:nil];
+    FRAlertAction *cancleAction = [FRAlertAction actionWithTitle:cancleTitle?cancleTitle:@"取消" style:FRAlertActionStyleColor color:[UIColor redColor] handler:nil];
     
-    FRAlertAction *makeSureAction = [FRAlertAction actionWithTitle:@"确定" style:style color:color handler:^(FRAlertAction * _Nonnull action) {
+    FRAlertAction *makeSureAction = [FRAlertAction actionWithTitle:makeSureTitle?makeSureTitle:@"确定" style:style color:color handler:^(FRAlertAction * _Nonnull action) {
         
         if(weakSelf.alertPickerViewBlock) weakSelf.alertPickerViewBlock(self.pickerIndexPathArray);
     }];
