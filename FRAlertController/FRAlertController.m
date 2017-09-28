@@ -10,6 +10,9 @@
 
 #import "FRAlertController.h"
 
+
+#define FR_IPHONE_X ([UIScreen mainScreen].bounds.size.width == 375 && [UIScreen mainScreen].bounds.size.height == 812)
+
 @interface FRAlertController ()<
 UITableViewDataSource,
 UITableViewDelegate,
@@ -421,8 +424,13 @@ UIPickerViewDelegate>
     }
     if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet && self.cancleButton) {
         
-        //修改alertView距底部的约束
-        [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-60];
+        if (FR_IPHONE_X) {
+            //修改alertView距底部的约束
+            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-94];
+        }else {
+            //修改alertView距底部的约束
+            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-60];
+        }
         
         [self.buttons removeObject:self.cancleButton];
         [self.cancleButton removeFromSuperview];
@@ -434,8 +442,13 @@ UIPickerViewDelegate>
         [self.cancleButton setAutoLayoutHeight:40];
         
     }else {
-        //创建距底部的约束
-        [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
+        if (FR_IPHONE_X) {
+            //修改alertView距底部的约束
+            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-44];
+        }else {
+            //修改alertView距底部的约束
+            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
+        }
     }
 }
 /**  ----- 为alertController添加按钮（action） -----  */
