@@ -169,7 +169,7 @@
              */
             
             /**  建议使用  */
-            [FRAlertController showPickerViewWithTitle:@"美食" message:nil preferredStyle:FRAlertControllerStyleActionSheet pickerArray:pickArray pickerButtonColor:[self randomColor] pickerViewStyle:FRAlertActionStyleColor configurationHandler:^(NSArray<NSIndexPath *> * _Nonnull indexPathArray) {
+            [FRAlertController showPickerViewWithTitle:@"美食" message:nil preferredStyle:FRAlertControllerStyleActionSheet pickerArray:pickArray pickerButtonColor:[self randomColor]cancleTitle:@"取消" makeSureTitle:@"确定" pickerViewStyle:FRAlertActionStyleColor configurationHandler:^(NSArray<NSIndexPath *> * _Nonnull indexPathArray) {
                 for (NSIndexPath *indexPath in indexPathArray) {
                     NSArray *sectionArray = pickArray[indexPath.section];
                     NSLog(@"%@",sectionArray[indexPath.row]);
@@ -203,7 +203,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"系统样式",@"带按钮的提醒",@"带按钮仅标题的提醒",@"带按钮仅描述的提醒",@"多选择的提醒",@"密码",@"pickView"];
+        _alertArray = @[@"系统样式",@"FRActionSheet",@"仅标题的FRActionSheet",@"仅描述的FRActionSheet",@"多按钮的FRActionSheet",@"密码样式FRActionSheet",@"pickView样式FRActionSheet"];
     }
     return _alertArray;
 }

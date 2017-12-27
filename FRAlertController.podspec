@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "FRAlertController"
-  s.version      = "1.0.1"
+  s.version      = "1.0.2"
   s.platform     = :ios, "7.0"
   s.ios.deployment_target = '7.0'
   s.summary      = "A modeled system UIAlertController to achieve FRAlertController"

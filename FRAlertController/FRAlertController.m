@@ -169,18 +169,6 @@ UIPickerViewDelegate>
 }
 
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    if (!(self.buttons.count > 0 || self.alertArray.count > 0 || self.payMoney)) {
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            
-            [self dismissViewControllerAnimated:YES completion:nil];
-        });
-    }
-    
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
@@ -441,13 +429,14 @@ UIPickerViewDelegate>
         [self.cancleButton setAutoLayoutRightToViewRight:self.alertView constant:0];
         [self.cancleButton setAutoLayoutHeight:40];
         
-    }else {
+    }
+    if(self.passWardBlock && self.alertPreferredStyle == FRAlertControllerStyleActionSheet){
         if (FR_IPHONE_X) {
             //修改alertView距底部的约束
-            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-44];
+            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-34];
         }else {
             //修改alertView距底部的约束
-            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
+            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:0];
         }
     }
 }
@@ -1013,7 +1002,6 @@ UIPickerViewDelegate>
         if (self.buttons.count < 1 && !self.message && self.alertArray.count < 1 && self.mutableTextFields.count < 1 && !self.payMoney) {
             [_titleLabel setAutoLayoutBottomToViewBottom:self.alertView constant:-15];
         }
-        
         
         _titleLabel.font = [UIFont boldSystemFontOfSize:18];
         _titleLabel.numberOfLines = 0;

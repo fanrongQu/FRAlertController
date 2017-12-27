@@ -1,7 +1,7 @@
 # FRAlertController-master
 模仿系统UIAlertController实现的一个FRAlertController
 
-Alert![](https://github.com/fanrongQu/FRAlertController-master/blob/master/alert.gif) ActionSheet ![](https://github.com/fanrongQu/FRAlertController-master/blob/master/ActionSheet.gif)
+Alert![](https://github.com/fanrongQu/FRAlertController-master/blob/master/FRAlert.gif) ActionSheet ![](https://github.com/fanrongQu/FRAlertController-master/blob/master/FRActionSheet.gif)
 
 ## CocoaPods
  pod 'FRAlertController'
