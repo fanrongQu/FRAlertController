@@ -8,9 +8,9 @@
 //  https://github.com/fanrongQu/FRAlertController-master
 //
 
-#import "UIView+Layer.h"
+#import "UIView+FRLayer.h"
 
-@implementation UIView (Layer)
+@implementation UIView (FRLayer)
 
 
 /**

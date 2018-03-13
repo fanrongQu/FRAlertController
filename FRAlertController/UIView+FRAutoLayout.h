@@ -1,5 +1,5 @@
 //
-//  UIView+AutoLayout.h
+//  UIView+FRAutoLayout.h
 //  FRAlertController
 //
 //  Created by 1860 on 2016/12/10.
@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (AutoLayout)
+@interface UIView (FRAutoLayout)
 
 
 #pragma mark - 中心点的约束

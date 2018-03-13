@@ -9,7 +9,7 @@
 //
 
 #import "ViewController.h"
-#import "UIView+AutoLayout.h"
+#import "UIView+FRAutoLayout.h"
 #import "AlertViewController.h"
 #import "ActionSheetViewController.h"
 

@@ -9,8 +9,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UIView+AutoLayout.h"
-#import "UIView+Layer.h"
+#import "UIView+FRAutoLayout.h"
+#import "UIView+FRLayer.h"
 
 typedef NS_ENUM(NSInteger, FRAlertActionStyle) {
     FRAlertActionStyleDefault = 0,//普通按钮

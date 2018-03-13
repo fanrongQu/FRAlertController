@@ -218,11 +218,13 @@ UIPickerViewDelegate>
     [self.mutableActions addObject:action];
     
     // 创建 button，设置它的属性
-    UIButton *actionButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    UIButton *actionButton = [[UIButton alloc] init];
     [actionButton setTag:[self.actions indexOfObject:action]];
     [actionButton setTitle:action.title forState:UIControlStateNormal];
     [actionButton.titleLabel setFont:[UIFont systemFontOfSize:15]];
-    [actionButton setTitleColor:[UIColor colorWithRed:0.0 green:122.0/255.0 blue:1 alpha:1] forState:UIControlStateNormal];
+    actionButton.titleLabel.numberOfLines = 2;
+    actionButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [actionButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
     [actionButton setBackgroundColor:[UIColor whiteColor]];
     actionButton.enabled = action.isEnabled;
     
@@ -331,7 +333,7 @@ UIPickerViewDelegate>
     }
     [leftButton setAutoLayoutLeftToViewLeft:self.alertView constant:15];
     [leftButton setAutoLayoutBottomToViewBottom:self.alertView constant:-12];
-    [leftButton setAutoLayoutHeight:40];
+    [leftButton setAutoLayoutHeight:44];
     
     
     [rightButton setAutoLayoutTopToViewTop:leftButton constant:0];
@@ -401,7 +403,7 @@ UIPickerViewDelegate>
         }
         [button setAutoLayoutLeftToViewLeft:self.alertView constant:0];
         [button setAutoLayoutRightToViewRight:self.alertView constant:0];
-        [button setAutoLayoutHeight:40];
+        [button setAutoLayoutHeight:44];
         if (n == count - 1) {
             [button setAutoLayoutBottomToViewBottom:self.alertView constant:0];
         }
@@ -427,7 +429,7 @@ UIPickerViewDelegate>
         [self.cancleButton setAutoLayoutTopToViewBottom:self.alertView constant:10];
         [self.cancleButton setAutoLayoutLeftToViewLeft:self.alertView constant:0];
         [self.cancleButton setAutoLayoutRightToViewRight:self.alertView constant:0];
-        [self.cancleButton setAutoLayoutHeight:40];
+        [self.cancleButton setAutoLayoutHeight:44];
         
     }
     if(self.passWardBlock && self.alertPreferredStyle == FRAlertControllerStyleActionSheet){
@@ -451,7 +453,7 @@ UIPickerViewDelegate>
     UIView *leftView = [[UIView alloc]initWithFrame:CGRectMake(0, 0, 5, 10)];
     [textField setLeftView:leftView];
     textField.leftViewMode = UITextFieldViewModeAlways;
-    [textField setLayerWithCornerRadius:3.0 borderWidth:0.5 borderColor:[UIColor blackColor]];
+    [textField setLayerWithCornerRadius:3.0 borderWidth:0.5 borderColor:[UIColor colorWithWhite:0.0 alpha:0.4]];
     textField.delegate = self;
     //添加到mutableTextFields数组
     [self.mutableTextFields addObject:textField];
@@ -492,7 +494,7 @@ UIPickerViewDelegate>
         }
         [textField setAutoLayoutLeftToViewLeft:self.alertView constant:20];
         [textField setAutoLayoutRightToViewRight:self.alertView constant:-20];
-        [textField setAutoLayoutHeight:30];
+        [textField setAutoLayoutHeight:32];
         if ((n == count - 1)&&self.buttons.count == 0) {
             [textField setAutoLayoutBottomToViewBottom:self.alertView constant:-15];
         }

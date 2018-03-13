@@ -10,8 +10,8 @@
 		3B7474701E110A7D0001367B /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7474671E110A7D0001367B /* close@2x.png */; };
 		3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7474691E110A7D0001367B /* FRAlertAction.m */; };
 		3B7474721E110A7D0001367B /* FRAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746B1E110A7D0001367B /* FRAlertController.m */; };
-		3B7474731E110A7D0001367B /* UIView+AutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746D1E110A7D0001367B /* UIView+AutoLayout.m */; };
-		3B7474741E110A7D0001367B /* UIView+Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746F1E110A7D0001367B /* UIView+Layer.m */; };
+		3B7474731E110A7D0001367B /* UIView+FRAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746D1E110A7D0001367B /* UIView+FRAutoLayout.m */; };
+		3B7474741E110A7D0001367B /* UIView+FRLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746F1E110A7D0001367B /* UIView+FRLayer.m */; };
 		3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */; };
 		3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */; };
 		3BF5F2021DFBD1B1005BCAEC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BF5F2011DFBD1B1005BCAEC /* main.m */; };
@@ -28,10 +28,10 @@
 		3B7474691E110A7D0001367B /* FRAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertAction.m; sourceTree = "<group>"; };
 		3B74746A1E110A7D0001367B /* FRAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAlertController.h; sourceTree = "<group>"; };
 		3B74746B1E110A7D0001367B /* FRAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertController.m; sourceTree = "<group>"; };
-		3B74746C1E110A7D0001367B /* UIView+AutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+AutoLayout.h"; sourceTree = "<group>"; };
-		3B74746D1E110A7D0001367B /* UIView+AutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+AutoLayout.m"; sourceTree = "<group>"; };
-		3B74746E1E110A7D0001367B /* UIView+Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Layer.h"; sourceTree = "<group>"; };
-		3B74746F1E110A7D0001367B /* UIView+Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Layer.m"; sourceTree = "<group>"; };
+		3B74746C1E110A7D0001367B /* UIView+FRAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRAutoLayout.h"; sourceTree = "<group>"; };
+		3B74746D1E110A7D0001367B /* UIView+FRAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRAutoLayout.m"; sourceTree = "<group>"; };
+		3B74746E1E110A7D0001367B /* UIView+FRLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRLayer.h"; sourceTree = "<group>"; };
+		3B74746F1E110A7D0001367B /* UIView+FRLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRLayer.m"; sourceTree = "<group>"; };
 		3BDF9F9C1DFFD6A400C20263 /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
 		3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlertViewController.m; sourceTree = "<group>"; };
 		3BDF9F9F1DFFD75800C20263 /* ActionSheetViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActionSheetViewController.h; sourceTree = "<group>"; };
@@ -67,10 +67,10 @@
 				3B7474691E110A7D0001367B /* FRAlertAction.m */,
 				3B74746A1E110A7D0001367B /* FRAlertController.h */,
 				3B74746B1E110A7D0001367B /* FRAlertController.m */,
-				3B74746C1E110A7D0001367B /* UIView+AutoLayout.h */,
-				3B74746D1E110A7D0001367B /* UIView+AutoLayout.m */,
-				3B74746E1E110A7D0001367B /* UIView+Layer.h */,
-				3B74746F1E110A7D0001367B /* UIView+Layer.m */,
+				3B74746C1E110A7D0001367B /* UIView+FRAutoLayout.h */,
+				3B74746D1E110A7D0001367B /* UIView+FRAutoLayout.m */,
+				3B74746E1E110A7D0001367B /* UIView+FRLayer.h */,
+				3B74746F1E110A7D0001367B /* UIView+FRLayer.m */,
 			);
 			name = FRALertController;
 			path = ../../FRALertController;
@@ -194,13 +194,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BF5F2081DFBD1B1005BCAEC /* ViewController.m in Sources */,
-				3B7474731E110A7D0001367B /* UIView+AutoLayout.m in Sources */,
+				3B7474731E110A7D0001367B /* UIView+FRAutoLayout.m in Sources */,
 				3BF5F2051DFBD1B1005BCAEC /* AppDelegate.m in Sources */,
 				3B7474721E110A7D0001367B /* FRAlertController.m in Sources */,
 				3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */,
 				3BF5F2021DFBD1B1005BCAEC /* main.m in Sources */,
 				3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */,
-				3B7474741E110A7D0001367B /* UIView+Layer.m in Sources */,
+				3B7474741E110A7D0001367B /* UIView+FRLayer.m in Sources */,
 				3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

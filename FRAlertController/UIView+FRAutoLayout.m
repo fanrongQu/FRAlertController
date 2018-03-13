@@ -1,5 +1,5 @@
 //
-//  UIView+AutoLayout.m
+//  UIView+FRAutoLayout.m
 //  FRAlertController
 //
 //  Created by 1860 on 2016/12/10.
@@ -8,9 +8,9 @@
 //  https://github.com/fanrongQu/FRAlertController-master
 //
 
-#import "UIView+AutoLayout.h"
+#import "UIView+FRAutoLayout.h"
 
-@implementation UIView (AutoLayout)
+@implementation UIView (FRAutoLayout)
 
 #pragma mark - 中心点的约束
 /**

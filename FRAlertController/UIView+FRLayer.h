@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface UIView (Layer)
+@interface UIView (FRLayer)
 
 
 /**

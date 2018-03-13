@@ -4,7 +4,9 @@
 Alert![](https://github.com/fanrongQu/FRAlertController-master/blob/master/FRAlert.gif) ActionSheet ![](https://github.com/fanrongQu/FRAlertController-master/blob/master/FRActionSheet.gif)
 
 ## CocoaPods
+```Objective-C
  pod 'FRAlertController'
+```
 
 
 ## FRAlertController
