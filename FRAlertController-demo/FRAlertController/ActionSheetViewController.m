@@ -190,10 +190,9 @@
         _tableView = [[UITableView alloc]init];
         [self.view addSubview:_tableView];
         
-        [_tableView setAutoLayoutTopToViewTop:self.view constant:0];
-        [_tableView setAutoLayoutLeftToViewLeft:self.view constant:0];
-        [_tableView setAutoLayoutRightToViewRight:self.view constant:0];
-        [_tableView setAutoLayoutBottomToViewBottom:self.view constant:0];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.edges.mas_offset(0);
+        }];
         
         _tableView.delegate = self;
         _tableView.dataSource = self;

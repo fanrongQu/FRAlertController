@@ -10,7 +10,6 @@
 
 #import "FRAlertController.h"
 
-
 #define FR_IPHONE_X ([UIScreen mainScreen].bounds.size.width == 375 && [UIScreen mainScreen].bounds.size.height == 812)
 
 @interface FRAlertController ()<
@@ -129,7 +128,9 @@ UIPickerViewDelegate>
         
         height = height > tableViewH ? tableViewH : height;
         //根据数组的长度设置alertView的高度
-        [self.alertView setAutoLayoutHeight:height];
+        [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.height.mas_offset(height);
+        }];
         
         [self.tableView reloadData];
         
@@ -310,40 +311,47 @@ UIPickerViewDelegate>
     
     UIButton *leftButton = self.buttons[0];
     UIButton *rightButton = self.buttons[1];
+    
+    UIView *topView;
+    CGFloat topOffset = 12;
     if (_datePicker) {
-        
-        [leftButton setAutoLayoutTopToViewBottom:self.datePicker constant:12];
+        topView = _datePicker;
     }else if (_pickerView) {
-        
-        [leftButton setAutoLayoutTopToViewBottom:self.pickerView constant:12];
+        topView = _pickerView;
     }else if (self.textFields.count > 0) {
         
         [self layoutTextField];
-        UITextField *view = self.mutableTextFields[_mutableTextFields.count - 1];;
-        [leftButton setAutoLayoutTopToViewBottom:view constant:12];
+        UITextField *view = self.mutableTextFields[_mutableTextFields.count - 1];
+        topView = view;
     }else if (self.message) {
-        
-        [leftButton setAutoLayoutTopToViewBottom:self.messageLabel constant:15];
+        topView = self.messageLabel;
+        topOffset = 14;
     }else if (self.title) {
-        
-        [leftButton setAutoLayoutTopToViewBottom:self.titleLabel constant:15];
+        topView = self.titleLabel;
+        topOffset = 14;
     }else {
-        
-        [leftButton setAutoLayoutTopToViewTop:self.alertView constant:16];
+        topView = self.alertView;
+        topOffset = 16;
     }
-    [leftButton setAutoLayoutLeftToViewLeft:self.alertView constant:15];
-    [leftButton setAutoLayoutBottomToViewBottom:self.alertView constant:-12];
-    [leftButton setAutoLayoutHeight:44];
+    [leftButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(topView.mas_bottom).offset(topOffset);
+        make.left.mas_offset(16);
+        make.bottom.mas_offset(-12);
+        make.height.mas_offset(44);
+    }];
     
+    [rightButton mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.mas_equalTo(leftButton.mas_right).offset(10);
+        make.right.mas_offset(-16);
+        make.centerY.mas_equalTo(leftButton);
+        make.size.mas_equalTo(leftButton);
+    }];
     
-    [rightButton setAutoLayoutTopToViewTop:leftButton constant:0];
-    [rightButton setAutoLayoutLeftToViewRight:leftButton constant:10];
-    [rightButton setAutoLayoutBottomToViewBottom:leftButton constant:0];
-    [rightButton setAutoLayoutRightToViewRight:self.alertView constant:-15];
-    [rightButton setAutoLayoutWidthToView:leftButton constant:0];
     //创建距底部的约束
     if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
-        [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-10];
+        [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.bottom.mas_offset(-10);
+        }];
     }
     
     [self.alertView setNeedsLayout];
@@ -364,49 +372,54 @@ UIPickerViewDelegate>
         
         UIButton *button = self.buttons[n];
         if(!lastView) {
+            
+            CGFloat topOffset = 12;
             if (_datePicker) {
                 lastView = self.datePicker;
-                
-                [button setAutoLayoutTopToViewBottom:lastView constant:12];
             }else if (_pickerView) {
                 lastView = self.pickerView;
-                
-                [button setAutoLayoutTopToViewBottom:lastView constant:12];
             }else if (self.textFields.count > 0) {
                 [self layoutTextField];
                 lastView = self.mutableTextFields[_mutableTextFields.count - 1];
-                
-                [button setAutoLayoutTopToViewBottom:lastView constant:12];
             }else if (self.message) {
                 lastView = self.messageLabel;
-                [button setAutoLayoutTopToViewBottom:lastView constant:15];
+                topOffset = 14;
             }else if (self.title) {
-                
                 lastView = self.titleLabel;
-                [button setAutoLayoutTopToViewBottom:lastView constant:15];
+                topOffset = 14;
             }else {
-                
                 lastView = self.alertView;
-                [button setAutoLayoutTopToViewTop:lastView constant:16];
+                topOffset = 16;
             }
-            
-            //添加分割线
-            UIView *lineView = [[UIView alloc] init];
-            lineView.backgroundColor = FRUIColor_RGB(192, 190, 197, 1);
-            [self.alertView insertSubview:lineView belowSubview:button];
-            [lineView setAutoLayoutTopToViewTop:button constant:-0.5];
-            [lineView setAutoLayoutBottomToViewBottom:self.alertView constant:0];
-            [lineView setAutoLayoutWidthToView:button constant:0];
-            [lineView setAutoLayoutCenterXToViewCenterX:button constant:0];
+            if (lastView == self.alertView) {
+                [button mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(lastView).offset(topOffset);
+                }];
+            }else {
+                [button mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.top.mas_equalTo(lastView.mas_bottom).offset(topOffset);
+                }];
+            }
         }else {
-            [button setAutoLayoutTopToViewBottom:lastView constant:0.5];
+            [button mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(lastView.mas_bottom).offset(0.5);
+            }];
         }
-        [button setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-        [button setAutoLayoutRightToViewRight:self.alertView constant:0];
-        [button setAutoLayoutHeight:44];
-        if (n == count - 1) {
-            [button setAutoLayoutBottomToViewBottom:self.alertView constant:0];
-        }
+        [button mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.height.mas_offset(44);
+            if (n == count - 1) make.bottom.mas_offset(0);
+        }];
+        //添加分割线
+        UIView *lineView = [[UIView alloc] init];
+        lineView.backgroundColor = FRUIColor_RGB(192, 190, 197, 1);
+        [self.alertView insertSubview:lineView belowSubview:button];
+        [lineView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(button).offset(-0.5);
+            make.left.right.mas_offset(0);
+            make.height.mas_offset(0.5);
+        }];
+        
         //修改按钮样式
         [button setLayerWithCornerRadius:0 borderWidth:0 borderColor:nil];
         
@@ -416,29 +429,37 @@ UIPickerViewDelegate>
         
         if (FR_IPHONE_X) {
             //修改alertView距底部的约束
-            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-94];
+            [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_offset(-94);
+            }];
         }else {
             //修改alertView距底部的约束
-            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-60];
+            [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_offset(-60);
+            }];
         }
         
         [self.buttons removeObject:self.cancleButton];
         [self.cancleButton removeFromSuperview];
         [self.view addSubview:self.cancleButton];
         
-        [self.cancleButton setAutoLayoutTopToViewBottom:self.alertView constant:10];
-        [self.cancleButton setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-        [self.cancleButton setAutoLayoutRightToViewRight:self.alertView constant:0];
-        [self.cancleButton setAutoLayoutHeight:44];
-        
+        [self.cancleButton mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.alertView.mas_bottom).offset(10);
+            make.left.right.mas_equalTo(self.alertView);
+            make.height.mas_offset(44);
+        }];
     }
     if(self.passWardBlock && self.alertPreferredStyle == FRAlertControllerStyleActionSheet){
         if (FR_IPHONE_X) {
             //修改alertView距底部的约束
-            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:-34];
+            [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_offset(-34);
+            }];
         }else {
             //修改alertView距底部的约束
-            [self.alertView setAutoLayoutBottomToViewBottom:self.view constant:0];
+            [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.bottom.mas_offset(0);
+            }];
         }
     }
 }
@@ -478,6 +499,7 @@ UIPickerViewDelegate>
     for (int n = 0; n < count; n++) {
         
         UITextField *textField = self.mutableTextFields[n];
+        CGFloat topOffset = 10;
         if(!lastView) {
             if (_datePicker) {
                 lastView = self.datePicker;
@@ -488,17 +510,16 @@ UIPickerViewDelegate>
             }else {
                 lastView = self.alertView;
             }
-            [textField setAutoLayoutTopToViewBottom:lastView constant:12];
-        }else {
-            [textField setAutoLayoutTopToViewBottom:lastView constant:10];
+            topOffset = 12;
         }
-        [textField setAutoLayoutLeftToViewLeft:self.alertView constant:20];
-        [textField setAutoLayoutRightToViewRight:self.alertView constant:-20];
-        [textField setAutoLayoutHeight:32];
-        if ((n == count - 1)&&self.buttons.count == 0) {
-            [textField setAutoLayoutBottomToViewBottom:self.alertView constant:-15];
-        }
-        
+        [textField mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(lastView.mas_bottom).offset(topOffset);
+            make.left.mas_offset(20);
+            make.right.mas_offset(-20);
+            make.height.mas_offset(32);
+            if ((n == count - 1)&&self.buttons.count == 0) make.bottom.mas_offset(-14);
+        }];
+
         lastView = textField;
     }
 }
@@ -966,24 +987,24 @@ UIPickerViewDelegate>
         if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
             
             if(self.payMoney) {
-                //创建距左边的约束
-                [_alertView setAutoLayoutLeftToViewLeft:self.view constant:0];
-                //创建距右边的约束
-                [_alertView setAutoLayoutRightToViewRight:self.view constant:0];
+                [_alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.right.mas_offset(0);
+                }];
             }else {
-                //创建距左边的约束
-                [_alertView setAutoLayoutLeftToViewLeft:self.view constant:10];
-                //创建距右边的约束
-                [_alertView setAutoLayoutRightToViewRight:self.view constant:-10];
+                [_alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                    make.left.mas_offset(10);
+                    make.right.mas_offset(-10);
+                }];
                 [_alertView setLayerWithCornerRadius:5.0];
             }
         }else {
             
             //创建距中的约束
-            [_alertView setAutoLayoutCenterToViewCenter:self.view];
-            if(self.payMoney) [_alertView setAutoLayoutCenterYToViewCenterY:self.view constant:-60];
-            
-            [_alertView setAutoLayoutWidth:280];
+            [_alertView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.centerX.mas_offset(0);
+                make.centerY.mas_offset(self.payMoney?-60:0);
+                make.width.mas_equalTo(280);
+            }];
             
             [_alertView setLayerWithCornerRadius:5.0];
         }
@@ -998,13 +1019,12 @@ UIPickerViewDelegate>
     if (!_titleLabel) {
         _titleLabel = [[UILabel alloc]init];
         [self.alertView addSubview:_titleLabel];
-        [_titleLabel setAutoLayoutTopToViewTop:self.alertView constant:15];
-        [_titleLabel setAutoLayoutLeftToViewLeft:self.alertView constant:15];
-        [_titleLabel setAutoLayoutRightToViewRight:self.alertView constant:-15];
-        if (self.buttons.count < 1 && !self.message && self.alertArray.count < 1 && self.mutableTextFields.count < 1 && !self.payMoney) {
-            [_titleLabel setAutoLayoutBottomToViewBottom:self.alertView constant:-15];
-        }
         
+        [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.left.mas_offset(16);
+            make.right.mas_offset(-16);
+            if (self.buttons.count < 1 && !self.message && self.alertArray.count < 1 && self.mutableTextFields.count < 1 && !self.payMoney) make.bottom.mas_offset(-16);
+        }];
         _titleLabel.font = [UIFont boldSystemFontOfSize:18];
         _titleLabel.numberOfLines = 0;
         _titleLabel.textAlignment = NSTextAlignmentCenter;
@@ -1017,17 +1037,21 @@ UIPickerViewDelegate>
         _messageLabel = [[UILabel alloc]init];
         [self.alertView addSubview:_messageLabel];
         if (self.title.length > 0) {
-            
-            [_messageLabel setAutoLayoutTopToViewBottom:self.titleLabel constant:15];
+            [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(16);
+            }];
         }else {
-            [_messageLabel setAutoLayoutTopToViewTop:self.alertView constant:15];
+            [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_offset(16);
+            }];
         }
-        [_messageLabel setAutoLayoutLeftToViewLeft:self.alertView constant:15];
-        [_messageLabel setAutoLayoutRightToViewRight:self.alertView constant:-15];
         
-        if (self.buttons.count < 1 && self.alertArray.count < 1 && self.mutableTextFields.count < 1 && !self.payMoney) {
-            [_messageLabel setAutoLayoutBottomToViewBottom:self.alertView constant:-15];
-        }
+        [_messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(16);
+            make.right.mas_equalTo(-16);
+            if (self.buttons.count < 1 && self.alertArray.count < 1 && self.mutableTextFields.count < 1 && !self.payMoney) make.bottom.mas_offset(-16);
+        }];
+        
         _messageLabel.font = [UIFont systemFontOfSize:13];
         _messageLabel.numberOfLines = 0;
         _messageLabel.textAlignment = NSTextAlignmentCenter;
@@ -1042,15 +1066,22 @@ UIPickerViewDelegate>
         _datePicker = [[UIDatePicker alloc] init];
         [self.alertView addSubview:_datePicker];
         if (self.message) {
-            [_datePicker setAutoLayoutTopToViewBottom:self.messageLabel constant:0];
+            [_datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.messageLabel.mas_bottom);
+            }];
         }else if (self.title) {
-            [_datePicker setAutoLayoutTopToViewBottom:self.titleLabel constant:0];
+            [_datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom);
+            }];
         }else {
-            [_datePicker setAutoLayoutTopToViewBottom:self.alertView constant:0];
+            [_datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_offset(12);
+            }];
         }
-        [_datePicker setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-        [_datePicker setAutoLayoutRightToViewRight:self.alertView constant:0];
-        [_datePicker setAutoLayoutHeight:180];
+        [_datePicker mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.height.mas_offset(180);
+        }];
         
         [_datePicker setDatePickerMode:UIDatePickerModeDate];
         [_datePicker setLocale:[[NSLocale alloc]initWithLocaleIdentifier:@"zh_Hans_CN"]];
@@ -1070,15 +1101,23 @@ UIPickerViewDelegate>
         _pickerView.dataSource = self;
         [self.alertView addSubview:_pickerView];
         if (self.message) {
-            [_pickerView setAutoLayoutTopToViewBottom:self.messageLabel constant:0];
+            [_pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.messageLabel.mas_bottom);
+        }];
         }else if (self.title) {
-            [_pickerView setAutoLayoutTopToViewBottom:self.titleLabel constant:0];
+            [_pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom);
+            }];
         }else {
-            [_pickerView setAutoLayoutTopToViewBottom:self.alertView constant:0];
+            [_pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_offset(12);
+            }];
         }
-        [_pickerView setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-        [_pickerView setAutoLayoutRightToViewRight:self.alertView constant:0];
-        [_pickerView setAutoLayoutHeight:162];
+        
+        [_pickerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+            make.height.mas_offset(162);
+        }];
     }
     return _pickerView;
 }
@@ -1091,9 +1130,11 @@ UIPickerViewDelegate>
         _closeBtn = [[UIButton alloc]init];
         
         [self.alertView addSubview:_closeBtn];
-        [_closeBtn setAutoLayoutTopToViewTop:self.alertView constant:10];
-        [_closeBtn setAutoLayoutRightToViewRight:self.alertView constant:-10];
-        [_closeBtn setAutoLayoutSize:CGSizeMake(25, 25)];
+        [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_offset(10);
+            make.right.mas_offset(-10);
+            make.size.mas_offset(24);
+        }];
         
         [_closeBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];
         _closeBtn.imageView.contentMode = UIViewContentModeScaleAspectFit;
@@ -1108,13 +1149,20 @@ UIPickerViewDelegate>
         
         [self.alertView addSubview:_tableView];
         if (self.title) {
-            [_tableView setAutoLayoutTopToViewBottom:self.titleLabel constant:12];
+            [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(12);
+            }];
         }else {
-            [_tableView setAutoLayoutTopToViewTop:self.alertView constant:30];
+            [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_offset(30);
+            }];
         }
-        [_tableView setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-        [_tableView setAutoLayoutBottomToViewBottom:self.alertView constant:-12];
-        [_tableView setAutoLayoutRightToViewRight:self.alertView constant:-15];
+        [_tableView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_offset(1);
+            make.bottom.mas_offset(-12);
+            make.right.mas_equalTo(-16);
+        }];
+        
         _tableView.delegate = self;
         _tableView.dataSource = self;
         _tableView.bounces = NO;
@@ -1130,14 +1178,21 @@ UIPickerViewDelegate>
         [self.alertView addSubview:_payMoneyLabel];
         
         if (self.message) {
-            [_payMoneyLabel setAutoLayoutTopToViewBottom:self.messageLabel constant:8];
+            [_payMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.messageLabel.mas_bottom).offset(8);
+            }];
         }else if (self.title) {
-            [_payMoneyLabel setAutoLayoutTopToViewBottom:self.titleLabel constant:8];
+            [_payMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_equalTo(self.titleLabel.mas_bottom).offset(8);
+            }];
         }else {
-            [_payMoneyLabel setAutoLayoutTopToViewBottom:self.alertView constant:8];
+            [_payMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+                make.top.mas_offset(8);
+            }];
         }
-        [_payMoneyLabel setAutoLayoutLeftToViewLeft:self.alertView constant:0];
-        [_payMoneyLabel setAutoLayoutRightToViewRight:self.alertView constant:0];
+        [_payMoneyLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.right.mas_offset(0);
+        }];
         _payMoneyLabel.font = [UIFont systemFontOfSize:36];
         _payMoneyLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -1149,22 +1204,27 @@ UIPickerViewDelegate>
     if (!_pwdInputView) {
         _pwdInputView = [[UIView alloc]init];
         [self.alertView addSubview:_pwdInputView];
-        [_pwdInputView setAutoLayoutTopToViewBottom:self.payMoneyLabel constant:10];
-        [_pwdInputView setAutoLayoutCenterXToViewCenterX:self.alertView constant:0];
         
+        CGFloat bottomOffset;
         
         CGFloat height = 40;
         CGFloat width = height;
         if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
-            [_pwdInputView setAutoLayoutBottomToViewBottom:self.alertView constant:-260];
-            
+            bottomOffset = -260;
             CGSize screenSize = [UIScreen mainScreen].bounds.size;
             width = (screenSize.width - 80)/6;
         }else {
-            [_pwdInputView setAutoLayoutBottomToViewBottom:self.alertView constant:-20];
+            bottomOffset = -20;
         }
-        [_pwdInputView setAutoLayoutWidth:width * 6];
-        [_pwdInputView setAutoLayoutHeight:height];
+        
+        [_pwdInputView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.top.mas_equalTo(self.payMoneyLabel.mas_bottom).offset(10);
+            make.bottom.mas_offset(bottomOffset);
+            make.centerX.mas_offset(0);
+            make.width.mas_offset(width * 6);
+            make.height.mas_offset(height);
+        }];
+        
         _pwdInputView.backgroundColor = [UIColor whiteColor];
         [_pwdInputView setLayerWithCornerRadius:3.0 borderWidth:0.5 borderColor:[UIColor blackColor]];
         

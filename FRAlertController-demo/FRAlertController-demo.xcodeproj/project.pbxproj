@@ -10,7 +10,6 @@
 		3B7474701E110A7D0001367B /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7474671E110A7D0001367B /* close@2x.png */; };
 		3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7474691E110A7D0001367B /* FRAlertAction.m */; };
 		3B7474721E110A7D0001367B /* FRAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746B1E110A7D0001367B /* FRAlertController.m */; };
-		3B7474731E110A7D0001367B /* UIView+FRAutoLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746D1E110A7D0001367B /* UIView+FRAutoLayout.m */; };
 		3B7474741E110A7D0001367B /* UIView+FRLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746F1E110A7D0001367B /* UIView+FRLayer.m */; };
 		3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9F9D1DFFD6A400C20263 /* AlertViewController.m */; };
 		3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BDF9FA01DFFD75800C20263 /* ActionSheetViewController.m */; };
@@ -20,6 +19,7 @@
 		3BF5F20B1DFBD1B1005BCAEC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5F2091DFBD1B1005BCAEC /* Main.storyboard */; };
 		3BF5F20D1DFBD1B1005BCAEC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5F20C1DFBD1B1005BCAEC /* Assets.xcassets */; };
 		3BF5F2101DFBD1B1005BCAEC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3BF5F20E1DFBD1B1005BCAEC /* LaunchScreen.storyboard */; };
+		B1D8066457FDEDE0A857BD2E /* Pods_FRAlertController_demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 599F49A8C2EBC7F85D69EEBA /* Pods_FRAlertController_demo.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,8 +28,6 @@
 		3B7474691E110A7D0001367B /* FRAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertAction.m; sourceTree = "<group>"; };
 		3B74746A1E110A7D0001367B /* FRAlertController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAlertController.h; sourceTree = "<group>"; };
 		3B74746B1E110A7D0001367B /* FRAlertController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertController.m; sourceTree = "<group>"; };
-		3B74746C1E110A7D0001367B /* UIView+FRAutoLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRAutoLayout.h"; sourceTree = "<group>"; };
-		3B74746D1E110A7D0001367B /* UIView+FRAutoLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRAutoLayout.m"; sourceTree = "<group>"; };
 		3B74746E1E110A7D0001367B /* UIView+FRLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+FRLayer.h"; sourceTree = "<group>"; };
 		3B74746F1E110A7D0001367B /* UIView+FRLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+FRLayer.m"; sourceTree = "<group>"; };
 		3BDF9F9C1DFFD6A400C20263 /* AlertViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlertViewController.h; sourceTree = "<group>"; };
@@ -46,6 +44,9 @@
 		3BF5F20C1DFBD1B1005BCAEC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3BF5F20F1DFBD1B1005BCAEC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3BF5F2111DFBD1B1005BCAEC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AAB34C16764997235112963 /* Pods-FRAlertController-demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FRAlertController-demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-FRAlertController-demo/Pods-FRAlertController-demo.release.xcconfig"; sourceTree = "<group>"; };
+		599F49A8C2EBC7F85D69EEBA /* Pods_FRAlertController_demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FRAlertController_demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		870796D3AFFA9C30FCF929F9 /* Pods-FRAlertController-demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FRAlertController-demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-FRAlertController-demo/Pods-FRAlertController-demo.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B1D8066457FDEDE0A857BD2E /* Pods_FRAlertController_demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,8 +69,6 @@
 				3B7474691E110A7D0001367B /* FRAlertAction.m */,
 				3B74746A1E110A7D0001367B /* FRAlertController.h */,
 				3B74746B1E110A7D0001367B /* FRAlertController.m */,
-				3B74746C1E110A7D0001367B /* UIView+FRAutoLayout.h */,
-				3B74746D1E110A7D0001367B /* UIView+FRAutoLayout.m */,
 				3B74746E1E110A7D0001367B /* UIView+FRLayer.h */,
 				3B74746F1E110A7D0001367B /* UIView+FRLayer.m */,
 			);
@@ -81,6 +81,8 @@
 			children = (
 				3BF5F1FF1DFBD1B1005BCAEC /* FRAlertController */,
 				3BF5F1FE1DFBD1B1005BCAEC /* Products */,
+				6FB0DFB92E4817F6FD232C58 /* Pods */,
+				A1823EA2C6937AD85063042C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -121,6 +123,23 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		6FB0DFB92E4817F6FD232C58 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				870796D3AFFA9C30FCF929F9 /* Pods-FRAlertController-demo.debug.xcconfig */,
+				4AAB34C16764997235112963 /* Pods-FRAlertController-demo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		A1823EA2C6937AD85063042C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				599F49A8C2EBC7F85D69EEBA /* Pods_FRAlertController_demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -128,9 +147,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3BF5F2141DFBD1B1005BCAEC /* Build configuration list for PBXNativeTarget "FRAlertController-demo" */;
 			buildPhases = (
+				132E54330A999E6A9C495EF4 /* [CP] Check Pods Manifest.lock */,
 				3BF5F1F91DFBD1B1005BCAEC /* Sources */,
 				3BF5F1FA1DFBD1B1005BCAEC /* Frameworks */,
 				3BF5F1FB1DFBD1B1005BCAEC /* Resources */,
+				C147362943A625AC3A8C0E20 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -188,13 +209,51 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		132E54330A999E6A9C495EF4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FRAlertController-demo-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C147362943A625AC3A8C0E20 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-FRAlertController-demo/Pods-FRAlertController-demo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Masonry/Masonry.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Masonry.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-FRAlertController-demo/Pods-FRAlertController-demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3BF5F1F91DFBD1B1005BCAEC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3BF5F2081DFBD1B1005BCAEC /* ViewController.m in Sources */,
-				3B7474731E110A7D0001367B /* UIView+FRAutoLayout.m in Sources */,
 				3BF5F2051DFBD1B1005BCAEC /* AppDelegate.m in Sources */,
 				3B7474721E110A7D0001367B /* FRAlertController.m in Sources */,
 				3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */,
@@ -317,6 +376,7 @@
 		};
 		3BF5F2151DFBD1B1005BCAEC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 870796D3AFFA9C30FCF929F9 /* Pods-FRAlertController-demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -332,6 +392,7 @@
 		};
 		3BF5F2161DFBD1B1005BCAEC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4AAB34C16764997235112963 /* Pods-FRAlertController-demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

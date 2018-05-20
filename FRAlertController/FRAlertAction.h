@@ -9,7 +9,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "UIView+FRAutoLayout.h"
 #import "UIView+FRLayer.h"
 
 typedef NS_ENUM(NSInteger, FRAlertActionStyle) {

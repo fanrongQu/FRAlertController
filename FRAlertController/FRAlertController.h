@@ -13,7 +13,7 @@
 
 #import <UIKit/UIKit.h>
 #import "FRAlertAction.h"
-
+#import <Masonry/Masonry.h>
 
 typedef NS_ENUM(NSInteger, FRAlertControllerStyle) {
     FRAlertControllerStyleActionSheet = 0,
