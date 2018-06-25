@@ -350,7 +350,7 @@ UIPickerViewDelegate>
     //创建距底部的约束
     if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
         [self.alertView mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.bottom.mas_offset(-10);
+            make.bottom.mas_offset(FR_IPHONE_X ? -44 : -10);
         }];
     }
     
@@ -814,6 +814,8 @@ UIPickerViewDelegate>
                 keyboardHeight = 258;
             }else if (screenSize.height == 736) {//5.5"
                 keyboardHeight = 271;
+            }else if (screenSize.height == 812) {//5.8"
+                keyboardHeight = 333;
             }else {//3.5"
                 keyboardHeight = 253;
             }
@@ -826,6 +828,8 @@ UIPickerViewDelegate>
                 keyboardHeight = 258;
             }else if (screenSize.width == 736) {//5.5"
                 keyboardHeight = 271;
+            }else if (screenSize.width == 812) {//5.8"
+                keyboardHeight = 333;
             }else {//3.5"
                 keyboardHeight = 253;
             }
@@ -1210,8 +1214,8 @@ UIPickerViewDelegate>
         CGFloat height = 40;
         CGFloat width = height;
         if (self.alertPreferredStyle == FRAlertControllerStyleActionSheet) {
-            bottomOffset = -260;
             CGSize screenSize = [UIScreen mainScreen].bounds.size;
+            bottomOffset = FR_IPHONE_X ? -294 : -260;
             width = (screenSize.width - 80)/6;
         }else {
             bottomOffset = -20;
