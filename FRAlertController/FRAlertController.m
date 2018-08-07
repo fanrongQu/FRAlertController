@@ -278,8 +278,9 @@ UIPickerViewDelegate>
     
     
     [self.titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.top.left.mas_offset(16);
-        make.right.mas_offset(-16);
+        make.top.mas_offset(16);
+        make.left.mas_offset(_closeBtn?44:16);
+        make.right.mas_offset(_closeBtn?-44:-16);
     }];
     
     [self.messageLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -922,9 +923,9 @@ UIPickerViewDelegate>
         
         [self.contentView addSubview:_closeBtn];
         [_closeBtn mas_makeConstraints:^(MASConstraintMaker *make) {
-            make.top.mas_offset(10);
-            make.right.mas_offset(-10);
-            make.size.mas_offset(24);
+            make.top.mas_offset(0);
+            make.right.mas_offset(0);
+            make.size.mas_offset(44);
         }];
         
         [_closeBtn setImage:[UIImage imageNamed:@"close"] forState:UIControlStateNormal];

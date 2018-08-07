@@ -10,8 +10,13 @@
 
 #import "ActionSheetViewController.h"
 #import "FRAlertController.h"
+#import "FRArrayAlertController.h"
 
-@interface ActionSheetViewController ()<UITableViewDataSource,UITableViewDelegate>
+@interface ActionSheetViewController()<
+UITableViewDataSource,
+UITableViewDelegate,
+FRArrayAlertViewDataSource,
+FRArrayAlertViewDelegate>
 
 /**  tableView  */
 @property (nonatomic, strong) UITableView *tableView;
@@ -177,11 +182,44 @@
             }];
         }
             break;
-
+        case 7: {
+            FRArrayAlertController *alertController = [FRArrayAlertController alertControllerWithTitle:@"数组选择" message:@"自定义数组选择控件，点击对应的数据可以实现数组选择，数据设置方法及点击方法通过代理实现，和tableView设置方法相似" preferredStyle:FRAlertControllerStyleActionSheet];
+            alertController.dataSource = self;
+            alertController.delegate = self;
+            [alertController show];
+        }
             
         default:
             break;
     }
+}
+
+
+#pragma mark - FRArrayAlertController dataSource
+- (CGFloat)arrayAlertScrollViewHeight {
+    return self.alertArray.count * 44;
+}
+
+- (NSInteger)arrayAlertView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.alertArray.count;
+}
+
+- (UITableViewCell *)arrayAlertView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *ID = @"tableviewCell";
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
+    if (!cell) {
+        cell = [[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ID];
+    }
+    
+    NSString *alertType = self.alertArray[indexPath.row];
+    cell.textLabel.text = alertType;
+    
+    return cell;
+}
+
+#pragma mark - FRArrayAlertController delegate
+- (void)arrayAlertView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"点击了section:%ld, row:%ld",indexPath.section,indexPath.row);
 }
 
 #pragma mark - 懒加载
@@ -202,7 +240,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"系统样式",@"FRActionSheet",@"仅标题的FRActionSheet",@"仅描述的FRActionSheet",@"多按钮的FRActionSheet",@"密码样式FRActionSheet",@"pickView样式FRActionSheet"];
+        _alertArray = @[@"系统样式",@"FRActionSheet",@"仅标题的FRActionSheet",@"仅描述的FRActionSheet",@"多按钮的FRActionSheet",@"密码样式FRActionSheet",@"pickView样式FRActionSheet",@"数组选择样式FRActionSheet"];
     }
     return _alertArray;
 }
