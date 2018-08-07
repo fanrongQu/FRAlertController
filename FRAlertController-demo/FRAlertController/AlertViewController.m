@@ -171,25 +171,6 @@
             break;
         case 6: {
             
-            NSArray *array = @[@"北京",@"上海",@"天津",@"广州",@"重庆",@"杭州",@"深圳",@"南京",@"郑州",@"武汉",@"长沙"];
-            /**
-            FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"选择地区" message:nil preferredStyle:FRAlertControllerStyleAlert];
-            [alertController addSelectArray:array configurationHandler:^(NSInteger row) {
-                NSLog(@"%@",array[row]);
-            }];
-            
-            [alertController show];
-            */
-            
-            /**  建议使用  */
-             [FRAlertController showSelectArrayController:self title:@"选择地区" message:nil preferredStyle:FRAlertControllerStyleAlert selectArray:array configurationHandler:^(NSInteger row) {
-                 
-                 NSLog(@"%@",array[row]);
-             }];
-        }
-            break;
-        case 7: {
-            
             FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"这是alertController的标题，是可以自动换行的" message:@"我是alertController的副标题🆚，也是可以自动换行的。并且我会根据是否有主标题改变我自身的位置奥" preferredStyle:FRAlertControllerStyleAlert];
             [alertController addTextFieldConfigurationHandler:^(UITextField * _Nonnull textField) {
                 textField.placeholder = @"修改了的用户名";
@@ -229,7 +210,7 @@
             [alertController show];
         }
             break;
-        case 8: {
+        case 7: {
             /**
              FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"请输入支付密码" message:@"2016潮流男装爆款促销" preferredStyle:FRAlertControllerStyleAlert];
              [alertController addPassWardWithPayMoney:@"1000" configurationHandler:^(NSString * _Nonnull passWord) {
@@ -244,7 +225,7 @@
             }];
         }
             break;
-        case 9: {
+        case 8: {
             
             NSArray *pickArray = @[@[@"汉堡🍔",@"炸鸡",@"可乐",@"披萨",@"雪碧"],@[@"米饭",@"牛肉面",@"拉面",@"黄焖鸡",@"馄饨"]];
             /**
@@ -289,7 +270,7 @@
 
 - (NSArray *)alertArray {
     if (!_alertArray) {
-        _alertArray = @[@"系统样式",@"FRAlert",@"仅标题的FRAlert",@"仅描述的FRAlert",@"多按钮的FRAlert",@"日期选择器FRAlert",@"数组选取FRAlert",@"带textField的FRAlert",@"密码输入样式FRAlert",@"pickView样式FRAlert"];
+        _alertArray = @[@"系统样式",@"FRAlert",@"仅标题的FRAlert",@"仅描述的FRAlert",@"多按钮的FRAlert",@"日期选择器FRAlert",@"带textField的FRAlert",@"密码输入样式FRAlert",@"pickView样式FRAlert"];
     }
     return _alertArray;
 }

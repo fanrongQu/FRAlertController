@@ -10,6 +10,22 @@
 
 #import <UIKit/UIKit.h>
 
+typedef enum {
+    //上
+    UIViewBorderDirectTop = 0,
+    
+    //左
+    UIViewBorderDirectLeft,
+    
+    //下
+    UIViewBorderDirectBottom,
+    
+    //右
+    UIViewBorderDirectRight,
+    
+}UIViewBorderDirect;
+
+
 @interface UIView (FRLayer)
 
 
@@ -37,4 +53,20 @@
  */
 - (void)setLayerWithCornerRadius:(CGFloat)cornerRadius borderWidth:(CGFloat)borderWidth borderColor:(UIColor *)borderColor;
 
+/**
+ *  设置View的layer属性
+ *
+ *  @param corners 圆角类型
+ *  @param radius 圆角半径
+ */
+- (void)setLayerWithRoundingCorners:(UIRectCorner)corners radius:(CGFloat)radius;
+
+/**
+ *  添加边框：注给scrollView添加会出错
+ *
+ *  @param direct 方向
+ *  @param color  颜色
+ *  @param width  线宽
+ */
+- (void)setSingleBorder:(UIViewBorderDirect)direct color:(UIColor*)color width:(CGFloat)width;
 @end

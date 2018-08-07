@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		040A018E20E2547900787FAA /* SelectDataView.m in Sources */ = {isa = PBXBuildFile; fileRef = 040A018C20E2547900787FAA /* SelectDataView.m */; };
 		3B7474701E110A7D0001367B /* close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7474671E110A7D0001367B /* close@2x.png */; };
 		3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B7474691E110A7D0001367B /* FRAlertAction.m */; };
 		3B7474721E110A7D0001367B /* FRAlertController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B74746B1E110A7D0001367B /* FRAlertController.m */; };
@@ -23,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		040A018C20E2547900787FAA /* SelectDataView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SelectDataView.m; sourceTree = "<group>"; };
+		040A018D20E2547900787FAA /* SelectDataView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SelectDataView.h; sourceTree = "<group>"; };
 		3B7474671E110A7D0001367B /* close@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "close@2x.png"; sourceTree = "<group>"; };
 		3B7474681E110A7D0001367B /* FRAlertAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FRAlertAction.h; sourceTree = "<group>"; };
 		3B7474691E110A7D0001367B /* FRAlertAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FRAlertAction.m; sourceTree = "<group>"; };
@@ -69,6 +72,8 @@
 				3B7474691E110A7D0001367B /* FRAlertAction.m */,
 				3B74746A1E110A7D0001367B /* FRAlertController.h */,
 				3B74746B1E110A7D0001367B /* FRAlertController.m */,
+				040A018D20E2547900787FAA /* SelectDataView.h */,
+				040A018C20E2547900787FAA /* SelectDataView.m */,
 				3B74746E1E110A7D0001367B /* UIView+FRLayer.h */,
 				3B74746F1E110A7D0001367B /* UIView+FRLayer.m */,
 			);
@@ -258,6 +263,7 @@
 				3B7474721E110A7D0001367B /* FRAlertController.m in Sources */,
 				3B7474711E110A7D0001367B /* FRAlertAction.m in Sources */,
 				3BF5F2021DFBD1B1005BCAEC /* main.m in Sources */,
+				040A018E20E2547900787FAA /* SelectDataView.m in Sources */,
 				3BDF9F9E1DFFD6A400C20263 /* AlertViewController.m in Sources */,
 				3B7474741E110A7D0001367B /* UIView+FRLayer.m in Sources */,
 				3BDF9FA11DFFD75800C20263 /* ActionSheetViewController.m in Sources */,

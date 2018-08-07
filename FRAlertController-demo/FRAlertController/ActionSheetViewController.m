@@ -160,7 +160,7 @@
             
             NSArray *pickArray = @[@[@"汉堡🍔",@"炸鸡",@"可乐",@"披萨",@"雪碧"],@[@"米饭",@"牛肉面",@"拉面",@"黄焖鸡",@"馄饨"]];
             /**
-             FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"美食" message:nil preferredStyle:FRAlertControllerStyleActionSheet];
+             FRAlertController *alertController = [FRAlertController alertControllerWithTitle:@"美食" message:nil preferredStyle:FRAlertControllerStyleAlert];
              [alertController addPickerViewWithPickerArray:pickArray pickerButtonColor:[self randomColor] style:FRAlertActionStyleColor configurationHandler:^(NSIndexPath * _Nonnull indexpath) {
              NSArray *sectionArray = pickArray[indexPath.section];
              NSLog(@"%@",sectionArray[indexPath.row]);
@@ -169,7 +169,7 @@
              */
             
             /**  建议使用  */
-            [FRAlertController showPickerViewWithTitle:@"美食" message:nil preferredStyle:FRAlertControllerStyleActionSheet pickerArray:pickArray pickerButtonColor:[self randomColor]cancleTitle:@"取消" makeSureTitle:@"确定" pickerViewStyle:FRAlertActionStyleColor configurationHandler:^(NSArray<NSIndexPath *> * _Nonnull indexPathArray) {
+            [FRAlertController showPickerViewWithTitle:@"美食" message:nil preferredStyle:FRAlertControllerStyleAlert pickerArray:pickArray pickerButtonColor:[self randomColor]cancleTitle:@"取消" makeSureTitle:@"确定" pickerViewStyle:FRAlertActionStyleColor configurationHandler:^(NSArray<NSIndexPath *> * _Nonnull indexPathArray) {
                 for (NSIndexPath *indexPath in indexPathArray) {
                     NSArray *sectionArray = pickArray[indexPath.section];
                     NSLog(@"%@",sectionArray[indexPath.row]);

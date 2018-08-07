@@ -10,10 +10,15 @@
 
 /** 颜色 */
 #define FRUIColor_RGB(r, g, b, a) [UIColor colorWithRed:(r)/255.0 green:(g)/255.0 blue:(b)/255.0 alpha:(a)/1.0]
+#define FR_IPHONE_X ([UIScreen mainScreen].bounds.size.width == 375 && [UIScreen mainScreen].bounds.size.height == 812)
+//顶部安全域
+#define FR_SafeArea_T (FR_IPHONE_X ? 44 : 20)
+//底部安全域
+#define FR_SafeArea_B (FR_IPHONE_X ? 34 : 0)
 
 #import <UIKit/UIKit.h>
-#import "FRAlertAction.h"
 #import <Masonry/Masonry.h>
+#import "FRAlertAction.h"
 
 typedef NS_ENUM(NSInteger, FRAlertControllerStyle) {
     FRAlertControllerStyleActionSheet = 0,
@@ -23,10 +28,18 @@ typedef NS_ENUM(NSInteger, FRAlertControllerStyle) {
 typedef void (^ FRAlertDatePickerBlock)(UIDatePicker *__nonnull datePicker);
 typedef void (^ FRAlertPickerViewBlock)(NSArray<NSIndexPath *> *__nonnull indexPathArray);
 typedef void (^ FRAlertTextFieldBlock)(UITextField *__nonnull textField);
-typedef void (^ FRAlertArrayBlock)(NSInteger row);
 typedef void (^FRAlertPassWardBlock)(NSString *__nonnull passWord);
 
 @interface FRAlertController : UIViewController
+
+/**  弹框样式  */
+@property (nonatomic, readonly) FRAlertControllerStyle preferredStyle;
+/**  标题Label  */
+@property (nonatomic, strong) UILabel *titleLabel;
+/**  描述Label  */
+@property (nonatomic, strong) UILabel *messageLabel;
+/**  描述  */
+@property (nullable, nonatomic, copy) NSString *message;
 
 /**
  创建FRAlertController
@@ -41,14 +54,13 @@ typedef void (^FRAlertPassWardBlock)(NSString *__nonnull passWord);
 
 - (void)show;
 
-@property (nullable, nonatomic, copy) NSString *message;
-
-@property (nonatomic, readonly) FRAlertControllerStyle preferredStyle;
 
 #pragma mark - 按钮
 - (void)addAction:(nonnull FRAlertAction *)action;
 
 @property (nonatomic, readonly, nullable) NSArray<FRAlertAction *> *actions;
+/**  设置弹框按钮文字大小  */
+- (void)setButtonsFont:(UIFont *)font;
 
 #pragma mark - TextField
 - (void)addTextFieldConfigurationHandler:(nonnull FRAlertTextFieldBlock)configurationHandler;
@@ -122,29 +134,6 @@ typedef void (^FRAlertPassWardBlock)(NSString *__nonnull passWord);
 /**  选择器  */
 @property (nonatomic, strong, nullable) UIPickerView *pickerView;
 
-#pragma mark - SelectArray
-
-/**
- 类方法展示数组选择器
- 
- @param controller 当前控制器
- @param title 标题
- @param message 描述
- @param preferredStyle alertController类型
- @param array 待选数组
- @param configurationHandler 选中数组的序号
- 
- @return AlertController
- */
-+ (nonnull FRAlertController *)showSelectArrayController:(nonnull UIViewController *)controller title:(nullable NSString *)title message:(nullable NSString *)message preferredStyle:(FRAlertControllerStyle)preferredStyle selectArray:(nonnull NSArray *)array configurationHandler:(nonnull FRAlertArrayBlock)configurationHandler;
-
-/**
- 数组选择
- 
- @param array 待选数组
- @param configurationHandler 选中数组的序号
- */
-- (void)addSelectArray:(nonnull NSArray *)array configurationHandler:(nonnull FRAlertArrayBlock)configurationHandler;
 
 #pragma mark - PassWard
 /**
