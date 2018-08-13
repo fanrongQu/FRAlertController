@@ -9,5 +9,6 @@ Pod::Spec.new do |s|
   s.author       = {"FR" => "1366225686@qq.com"}
   s.source       = {:git => "https://github.com/fanrongQu/FRAlertController.git", :tag => s.version }
   s.source_files  = "FRAlertController"
+  s.dependency 'Masonry', '~> 1.1.0'
   
 end
